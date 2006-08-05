@@ -29,6 +29,9 @@ void blib_graph_free(blib_graph* g){
 }
 
 int blib_graph_edge(blib_graph* g,int a, int b){
+	if(a >= g->size || b >= g->size){
+		BLIB_ERROR("OUT OF BOUNDS");
+	}
 	return g->adj[a][b];
 }
 
@@ -38,7 +41,8 @@ int blib_graph_size(blib_graph* g){
 
 void blib_graph_set_dir_edge( blib_graph* g, int a, int b, int val){
 	if(a >= g->size || b >= g->size){
-		BLIB_ERROR("OUT OF BOUNDS");}
+		BLIB_ERROR("OUT OF BOUNDS");
+	}
 	g->adj[a][b]=val;
 }
 
@@ -49,6 +53,9 @@ void blib_graph_set_edge(blib_graph* g, int a, int b, int val){
 
 
 int blib_graph_is_edge(blib_graph* g, int a, int b){
+	if( a> g->size || b>g->size){
+		BLIB_ERROR("Edge out of bounds (%d,%d)",a,b);	
+	}
 	if(blib_graph_edge(g,a,b)!=0)
 		return 1;
 	return 0;

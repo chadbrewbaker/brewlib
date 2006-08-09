@@ -56,17 +56,16 @@ blib_graph_auto_storage* blib_graph_auto_init( blib_graph* g, blib_schreier* sch
 	stuff->child_cells=BLIB_MALLOC(sizeof(int*)*size);
 	for(i=0;i<size;i++)
 		stuff->child_cells[i]=(int*)BLIB_MALLOC(sizeof(int)*size);
-	stuff->split_stack=blib_cell_stack_allocate(size,size);
+	stuff->split_stack=blib_cell_stack_allocate(size*10);
 	stuff->adj_arr =(int*)BLIB_MALLOC(sizeof(int)*size);
 	stuff->graph=g;
 	stuff->schreier=schreier;
 	stuff->orbits=orbits;
- 	/*Start out with everybody same by default unless you pass it a pre-coloring*/
-	if(orbits==NULL){
+ 	/*Start out with every in a different orbit then discover automorphisms*/
+	if(orbits==NULL)
 		stuff->orbits=BLIB_MALLOC(sizeof(int)*size);
-		for(i=0;i<size;i++)
-			stuff->orbits[i]=0;
-	}
+	for(i=0;i<size;i++)
+		stuff->orbits[i]=i;
 	BLIB_ERROR("debug");
 	return stuff;
 }
@@ -75,7 +74,6 @@ blib_graph_auto_storage* blib_graph_auto_init( blib_graph* g, blib_schreier* sch
 void blib_graph_auto_finalize(blib_graph_auto_storage* stuff,blib_graph* graph,blib_schreier* schreier,int* orbits,int* certificate)
 {
 	int i,size;
-	BLIB_ERROR("");
 	size=blib_graph_size(graph);
 	
 	if(certificate != NULL){
@@ -118,54 +116,45 @@ void blib_graph_auto_split_cells(blib_graph_auto_storage* stuff,int depth, int s
 	int i,j,k,size,used,cells;
 	/*split each cell based on its counts*/
 	used=0;
-	cells=blib_partition_cell_count(stuff->part_stack[depth]);
-	BLIB_ERROR("");
-	for(i=0;i<cells;i++){
-		BLIB_ERROR("");
-		blib_partition_get_cell(stuff->part_stack[depth],i,stuff->scratch_arr, &size);
-		BLIB_ERROR("");
-		for(j=0;j<size;j++){
-			BLIB_ERROR("");
-			stuff->adj_arr[j+used]=0;
-			for(k=0;k<split_cell_size;k++){
-				BLIB_ERROR("");
+	size=blib_partition_size(stuff->part_stack[depth]);
+	for(i=0;i<size;i++){
+			stuff->adj_arr[i]=0;
+			for(j=0;j<split_cell_size;j++){
+				/* between stuff->split_cell[k] and nth item of part_stack[depth]*/
 				if(blib_graph_is_edge(stuff->graph,
-									  blib_partition_nth_item(stuff->part_stack[depth],j+used),
-									  stuff->scratch_arr[k])){
-					stuff->adj_arr[j+used]++;
+									  blib_partition_nth_item(stuff->part_stack[depth],i),
+									  stuff->split_cell[j])){
+					stuff->adj_arr[i]++;
 				}
-				BLIB_ERROR("");
-			}
-		}
-		used+=size;
+			}	
 	}
-	BLIB_ERROR("");
 	blib_partition_split_by_key(stuff->part_stack[depth],stuff->adj_arr,stuff->dirty_cell_arr,&stuff->dirty_cells);
 } 
 
 void blib_graph_auto_part_refine(blib_graph_auto_storage* stuff, int depth)
 {
 	int i,split_cell_size;
-	/*Push cells onto stack*/	
-	for(i=blib_partition_cell_count(stuff->part_stack[depth])-1;i >= 0;i--){
-		blib_partition_get_cell(stuff->part_stack[depth], i, stuff->scratch_arr, &split_cell_size);
+	/*Push cells onto stack*/
+	blib_error_tabs(depth);fprintf(stderr,"auto_part_refine(%d)BEFORE",depth);
+	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);
+	for(i=blib_partition_cell_count(stuff->part_stack[depth]);i > 0;i--){
+		blib_partition_get_cell(stuff->part_stack[depth], i-1, stuff->scratch_arr, &split_cell_size);
 		stuff->split_stack=blib_cell_stack_push(stuff->split_stack,stuff->scratch_arr, split_cell_size);
 	}
 	/*Pop top element, split cells on it, till stack is empty  */
-	BLIB_ERROR("");
 	while(blib_cell_stack_depth(stuff->split_stack)>0){
-		BLIB_ERROR("");
 		blib_cell_stack_pop(stuff->split_stack, stuff->split_cell, &split_cell_size);
-		BLIB_ERROR("");
+		/*Put the cell to split on in stuff->split_cell*/
 		blib_graph_auto_split_cells(stuff,depth,split_cell_size);
-		BLIB_ERROR("");
 		for(i=stuff->dirty_cells-1;i>=0;i--){
 			blib_partition_get_cell_at(stuff->part_stack[depth],stuff->dirty_cell_arr[i],
 									   stuff->scratch_arr,&split_cell_size);
 			stuff->split_stack=blib_cell_stack_push(stuff->split_stack, stuff->scratch_arr,split_cell_size);
 		}
 	}
-	BLIB_ERROR("");
+	blib_error_tabs(depth);fprintf(stderr,"auto_part_refine(%d)AFTER",depth);
+	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);
+
 }
 
 
@@ -199,31 +188,50 @@ int blib_graph_auto_part_test(blib_graph_auto_storage* stuff, int depth)
 int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result)
 {
 	int i,j,a,b,min,size;
-	if(result==0)/*found an automorph so record it*/{
+	blib_partition_print(stuff->part_stack[depth],stderr);
+	blib_error_tabs(depth);BLIB_ERROR(" <-recording%d,%d",depth,result);
+	/*Found an automorph so record it*/
+	if(result==0){
+		if(stuff->schreier!=NULL){
+			blib_schreier_print(stuff->schreier,stderr);
 			blib_partition_get_perm(stuff->part_stack[depth],stuff->scratch_arr);
-			if(stuff->schreier!=NULL){
-				blib_schreier_add_perm(stuff->schreier,stuff->scratch_arr);
-				if(blib_schreier_is_full(stuff->schreier))
-					return 1;
-			}
-			size=blib_graph_size(stuff->graph);
-			for(i=0;i<size;i++){
-				a=stuff->orbits[stuff->scratch_arr[i]];
-				b=stuff->orbits[i];
-				if(a!=b){/*We found a new symmetry so combine these classes*/
-					if(a<b)/*Give them the smallest of the two keys*/
-						min=a;
-					else
-						min=b;
-					for(j=0;j<size;j++){
-						if(stuff->orbits[j]== a || stuff->orbits[j]==b)
-							stuff->orbits[j]=min;
-					}
+			blib_schreier_add_perm(stuff->schreier,stuff->scratch_arr);
+			if(blib_schreier_is_full(stuff->schreier))
+				return 1;
+		}
+		size=blib_graph_size(stuff->graph);
+		fprintf(stderr,"orbits before<");
+		for(i=0;i<size;i++)
+			fprintf(stderr,"%d ",stuff->orbits[i]);
+		fprintf(stderr,">\n");
+			
+		for(i=0;i<size;i++){
+			a=stuff->orbits[stuff->scratch_arr[i]];
+			b=stuff->orbits[i];
+			/*We found a new symmetry so combine these classes*/
+			if(a!=b){
+				/*Give them the smallest of the two keys*/
+				if(a<b)
+					min=a;
+				else
+					min=b;
+				for(j=0;j<size;j++){
+					if(stuff->orbits[j]== a || stuff->orbits[j]==b)
+						stuff->orbits[j]=min;
 				}
 			}
 		}
-	else/*It's better so store it as the new best permutation*/
-			stuff->best_part=blib_partition_copy(stuff->part_stack[depth],stuff->best_part);
+		if(stuff->schreier!=NULL)
+			blib_schreier_print(stuff->schreier,stderr);
+		fprintf(stderr,"orbits after<");
+		for(i=0;i<size;i++)
+			fprintf(stderr,"%d ",stuff->orbits[i]);
+		fprintf(stderr,">\n");
+	
+	}
+	/*Record it as the new best permutation*/
+	else
+		stuff->best_part=blib_partition_copy(stuff->part_stack[depth],stuff->best_part);
 	return 0;
 }
 
@@ -232,25 +240,29 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 {
 	int i,cells,result,split_size,split_cell,min_cells,best_flag;
+	int d_size,d_j;
 	/*Assume it is already part_refined  at [depth], so we can write new copies to [depth+1] */
-	BLIB_ERROR("auto_sub(%d)      ",depth);
-	blib_partition_print(stuff->part_stack[depth],stderr);
+	blib_error_tabs(depth);fprintf(stderr,"auto_sub(%d)",depth);
+	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);
 	if(stuff->best_part == NULL)
 		best_flag=1;
 	else
 		best_flag=0;
 	cells=blib_partition_cell_count(stuff->part_stack[depth]);
 	result=blib_graph_auto_part_test(stuff,depth);
+	blib_error_tabs(depth);BLIB_ERROR("result was %d",result);
 	/*Worse off so backtrack*/
-	if(result < 0)
+	if(result < 0){
+		blib_error_tabs(depth);BLIB_ERROR("Returning %d",result);
 		return result;
+	}
 	/*If we have unit partitions record it*/
+	blib_error_tabs(depth);BLIB_ERROR("%d ==? %d",cells, blib_graph_size(stuff->graph));
 	if(cells == blib_graph_size(stuff->graph)){
 		blib_graph_auto_record(stuff,depth,result);
-		BLIB_ERROR("recording and returning...");
+		blib_error_tabs(depth);BLIB_ERROR("recording and returning %d",result);
 		return result;	
 	}
-	BLIB_ERROR("");
 	for(i=0;i<cells;i++){
 		split_size=blib_partition_cell_size(stuff->part_stack[depth],i);
 		if( split_size > 1){
@@ -258,22 +270,20 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 			break;
 		}
 	}
-	BLIB_ERROR("");
+	blib_error_tabs(depth);BLIB_ERROR("split_cell_size %d",split_size);
+	min_cells=blib_partition_size(stuff->part_stack[depth]);
 	for(i=0;i<split_size;i++){
 		/*Get the size of the partition after fixing each element.*/
-		BLIB_ERROR("");
 		stuff->part_stack[depth+1]=blib_partition_copy(stuff->part_stack[depth],stuff->part_stack[depth+1]);
 		blib_partition_fix_element(stuff->part_stack[depth+1], split_cell, i); 
-		BLIB_ERROR("about to refine %d",depth+1);
+		d_size=blib_partition_size(stuff->part_stack[depth+1]);
+		blib_partition_print(stuff->part_stack[depth+1],stderr);
 		blib_graph_auto_part_refine(stuff,depth+1);
-		BLIB_ERROR("");
 		stuff->child_cells[depth][i]=blib_partition_cell_count(stuff->part_stack[depth+1]);
-		BLIB_ERROR("");
 		if(stuff->child_cells[depth][i]<min_cells)
 			min_cells=stuff->child_cells[depth][i];
-		BLIB_ERROR("");
 	}
-	BLIB_ERROR("");
+	blib_error_tabs(depth);BLIB_ERROR("split_cell_size %d",split_size);
 	for(i=0;i<split_size;i++){
 		if(stuff->child_cells[depth][i]>min_cells)
 			continue;
@@ -285,27 +295,38 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 			best_flag=1;
 		if(result == 0){ /*We got an automorph, so backtrack up to the parent of the best found partition*/
 			if(best_flag==0){
-				BLIB_ERROR("returning 0");
+				blib_error_tabs(depth);BLIB_ERROR("returning 0");
 				return 0;
 			}
 		}
 	}
 if(best_flag){
-	BLIB_ERROR("returning 1");
+	blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning 1",depth);
 	return 1;
 }
-BLIB_ERROR("returning -1");
+blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning -1",depth);
 	return -1;
 }
 
 /*
+ 
+  -Want to partition verticies into "color classes"?Then pass a pre-partition, and possibly pass a forbiden schrier representation
+  -Want to say "vertex x and vertex y are pre-computed to be automorphic" then pass a schrier rep marking it as so
+ 
+ 
+ 
+ 
+ 
 	If you don't want orbits, certificate, or shreier pass a NULL.
 */
 void blib_graph_auto(blib_graph* graph, int* orbits, int* certificate, blib_schreier* schreier){
 	blib_graph_auto_storage* stuff;
 	stuff=blib_graph_auto_init(graph, schreier,orbits);
 	/*Should probably modify so orbits can take in pre-defined color classes*/
+	BLIB_ERROR(" cells = %d?",blib_partition_cell_count(stuff->part_stack[0]));
+
 	blib_graph_auto_part_refine(stuff,0);
+	BLIB_ERROR(" cells = %d?",blib_partition_cell_count(stuff->part_stack[0]));
 	BLIB_ERROR("About to sub");
 	blib_graph_auto_sub(stuff,0);
 	BLIB_ERROR("Finalizing and %d",1);

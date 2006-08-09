@@ -26,7 +26,6 @@ blib_partition* blib_partition_allocate(int size){
 
 void blib_partition_free(blib_partition* part){
 	if(part==NULL){
-		BLIB_ERROR("It's null baby");
 		return;
 	}
 	free(part->cells);
@@ -38,8 +37,10 @@ void blib_partition_free(blib_partition* part){
 
 int blib_partition_cell_size(blib_partition* part, int cell_index)
 {
-	if(cell_index > (part->cell_count-1))
-		return -1;
+	if(cell_index > (part->cell_count-1)){
+		BLIB_ERROR(" CELL DOES NOT EXIST");
+		return 99999;
+	}
 	if(cell_index+1 == part->cell_count)/*the last cell*/
 		return part->size - part->cells[cell_index];
 	else
@@ -53,7 +54,6 @@ int blib_partition_nth_item(blib_partition* part, int n)
 	if(n >= part->size){
 		BLIB_ERROR("OUT OF BOUNDS");
 	}
-	BLIB_ERROR("n is %d, and part has params size=%d cell_count=%d",n,part->size,part->cell_count);
 	return part->perm[n];
 	BLIB_ERROR("");
 }
@@ -135,17 +135,19 @@ int blib_partition_fix_element(blib_partition* part, int cell_index, int element
 	if(cell_index > part->cell_count)
 		return -1;
 	cell_size=blib_partition_cell_size(part,cell_index);
-	if(element > (cell_size-1))
+	if(element >=cell_size|| cell_size<=0){
+		BLIB_ERROR("OUT OF CELL BOUNDS");
 		return -1;
+	}
 	if(cell_size ==1)
 		return 0;
 	BLIB_ERROR("");
 	/*Swap the element to the front of the cell*/
-	temp=part->perm[part->cells[cell_index]];
+	temp=part->perm[part->cells[cell_index]];/*what was in front*/
 	part->perm[part->cells[cell_index]]= part->perm[part->cells[cell_index]+element];
 	part->perm[part->cells[cell_index]+element]=temp;
 	/*re-adjust cell indexes*/
-	for(i=part->cells[part->cells[0]]; i> cell_index;i--)
+	for(i=part->cell_count;i>cell_index;i--)
 		part->cells[i]=part->cells[i-1];
 	part->cells[cell_index+1]++;
 	part->cell_count++;
@@ -194,16 +196,17 @@ void blib_partition_get_perm(blib_partition* part, int* value)
 		value[i]=part->perm[i];
 }
 void blib_partition_print(blib_partition* part,FILE* stream){
-	int i,cell_index;
-	for(i=0;i<part->size;i++){
-		if(part->cells[i]==i){
-			if(i!=0)
-				fprintf(stream,"]");
-			fprintf(stream,"[");
+	int i,j,used,cell_index;
+	used=0;
+	for(i=0;i<part->cell_count;i++){
+		fprintf(stream,"[");
+		for(j=0;j<blib_partition_cell_size(part,i);j++){
+			fprintf(stream,"%d ",part->perm[used]);
+			used++;	
 		}
-		fprintf(stream,"%d ",part->perm[i]);
+		fprintf(stream,"]");
 	}
-	fprintf(stream,"]\n");
+	fprintf(stream,"\n");
 }
-
+	
 #endif /*_BLIB_PARTITION_DEF*/

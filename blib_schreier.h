@@ -92,4 +92,22 @@ int blib_schreier_add_perm(blib_schreier* g, int* new_perm)
 	return is_new;
 }
 
+void blib_schreier_print(blib_schreier* g, FILE* dest){
+	int i,j,printed;
+	fprintf(dest,"<");
+	for(i=0;i<g->size;i++){
+		printed=0;
+		for(j=0;j<i;j++){
+			if(blib_schreier_is_perm(g,i,j)){
+				fprintf(dest, "%d ",j);
+				printed=1;
+				break;
+			}
+		}
+		if(!printed)
+			fprintf(dest,"%d ",i);
+	}
+	fprintf(stderr,">\n");
+}
+
 #endif /*_BLIB_SCHREIER_DEF_*/

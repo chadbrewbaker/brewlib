@@ -13,8 +13,8 @@ int main(){
 	/*A tringle with a spoke of one point*/
 	blib_graph_set_edge(graph,0,1,1);
 	blib_graph_set_edge(graph,1,2,1);
+	blib_graph_set_edge(graph,2,0,1);
 	blib_graph_set_edge(graph,2,3,1);
-	blib_graph_set_edge(graph,3,1,1);
 	blib_graph_auto(graph,orbits,NULL,NULL);
 
 	for(i=0;i<graph->size;i++)

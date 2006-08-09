@@ -21,4 +21,11 @@ void* blib_error_malloc(size_t size, char* file,int line){
 }
 #define BLIB_MALLOC(size) blib_error_malloc(size,__FILE__,__LINE__);
 
+void blib_error_tabs(int tabs){
+	int i;
+	for(i=0;i<tabs;i++)
+		fprintf(stderr,"\t");
+}
+
+
 #endif /*_BLIB_ERROR_DEF_*/

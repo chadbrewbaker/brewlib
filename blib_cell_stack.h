@@ -65,7 +65,7 @@ blib_cell_stack* blib_cell_stack_grow(blib_cell_stack* cell_stack, int more_dept
 		BLIB_ERROR("Now why the heck would you want to do that");
 	}
 	blib_cell_stack* new_cell_stack;
-	new_cell_stack=blib_cell_stack_allocate(cell_stack->cells_allocated+more_depth);
+	new_cell_stack=blib_cell_stack_allocate(cell_stack->elts_allocated+more_depth);
 	return blib_cell_stack_copy(cell_stack,new_cell_stack);
 }
 

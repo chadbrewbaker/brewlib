@@ -206,15 +206,15 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 		fprintf(stderr,">\n");
 			
 		for(i=0;i<size;i++){
-			a=stuff->orbits[stuff->scratch_arr[i]];
-			b=stuff->orbits[i];
+			a=blib_partition_nth_item(stuff->part_stack[depth],i);
+			b=blib_partition_nth_item(stuff->best_part,i);
 			/*We found a new symmetry so combine these classes*/
 			if(a!=b){
-				/*Give them the smallest of the two keys*/
-				if(a<b)
-					min=a;
+				if(stuff->orbits[a]<=stuff->orbits[b])
+					min=stuff->orbits[a];
 				else
-					min=b;
+					min=stuff->orbits[b];
+				/*Give them the smallest of the two keys*/
 				for(j=0;j<size;j++){
 					if(stuff->orbits[j]== a || stuff->orbits[j]==b)
 						stuff->orbits[j]=min;

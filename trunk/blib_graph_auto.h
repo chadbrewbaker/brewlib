@@ -136,8 +136,8 @@ void blib_graph_auto_part_refine(blib_graph_auto_storage* stuff, int depth)
 	int i,j,split_cell_size,db0,db1;
 	/*Push cells onto stack*/
 	db1=stuff->split_stack->cells_allocated;
-	blib_error_tabs(depth);fprintf(stderr,"auto_part_refine(%d)BEFORE",depth);
-	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);
+	/*blib_error_tabs(depth);fprintf(stderr,"auto_part_refine(%d)BEFORE",depth);*/
+	/*blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);*/
 	for(i=blib_partition_cell_count(stuff->part_stack[depth]);i > 0;i--){
 		blib_partition_get_cell(stuff->part_stack[depth], i-1, stuff->scratch_arr, &split_cell_size);
 		stuff->split_stack=blib_cell_stack_push(stuff->split_stack,stuff->scratch_arr, split_cell_size);
@@ -155,8 +155,9 @@ void blib_graph_auto_part_refine(blib_graph_auto_storage* stuff, int depth)
 			stuff->split_stack=blib_cell_stack_push(stuff->split_stack, stuff->scratch_arr,split_cell_size);
 		}
 	}
+	/*
 	blib_error_tabs(depth);fprintf(stderr,"auto_part_refine(%d)AFTER",depth);
-	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);
+	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);*/
 
 }
 
@@ -191,7 +192,7 @@ int blib_graph_auto_part_test(blib_graph_auto_storage* stuff, int depth)
 int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result)
 {
 	int i,j,a,b,min,size;
-	blib_partition_print(stuff->part_stack[depth],stderr);
+	/*blib_partition_print(stuff->part_stack[depth],stderr);*/
 	blib_error_tabs(depth);BLIB_ERROR(" <-recording%d,%d",depth,result);
 	/*Found an automorph so record it*/
 	if(result==0){
@@ -203,10 +204,10 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 				return 1;
 		}
 		size=blib_graph_size(stuff->graph);
-		fprintf(stderr,"orbits before<");
+		/*fprintf(stderr,"orbits before<");
 		for(i=0;i<size;i++)
 			fprintf(stderr,"%d ",stuff->orbits[i]);
-		fprintf(stderr,">\n");
+		fprintf(stderr,">\n");*/
 			
 		for(i=0;i<size;i++){
 			a=blib_partition_nth_item(stuff->part_stack[depth],i);
@@ -226,11 +227,11 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 		}
 		if(stuff->schreier!=NULL)
 			blib_schreier_print(stuff->schreier,stderr);
-		fprintf(stderr,"orbits after<");
+		/*fprintf(stderr,"orbits after<");
 		for(i=0;i<size;i++)
 			fprintf(stderr,"%d ",stuff->orbits[i]);
-		fprintf(stderr,">\n");
-	
+		fprintf(stderr,">\n");*/
+		
 	}
 	/*Record it as the new best permutation*/
 	else
@@ -246,7 +247,7 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 	int d_size;
 	/*Assume it is already part_refined  at [depth], so we can write new copies to [depth+1] */
 	blib_error_tabs(depth);fprintf(stderr,"auto_sub(%d)",depth);
-	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);
+	/*blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);*/
 	if(stuff->best_part == NULL)
 		best_flag=1;
 	else
@@ -260,7 +261,7 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 		return result;
 	}
 	/*If we have unit partitions record it*/
-	blib_error_tabs(depth);BLIB_ERROR("%d ==? %d",cells, blib_graph_size(stuff->graph));
+	
 	if(cells == blib_graph_size(stuff->graph)){
 		blib_graph_auto_record(stuff,depth,result);
 		blib_error_tabs(depth);BLIB_ERROR("recording and returning %d",result);
@@ -280,7 +281,7 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 		stuff->part_stack[depth+1]=blib_partition_copy(stuff->part_stack[depth],stuff->part_stack[depth+1]);
 		blib_partition_fix_element(stuff->part_stack[depth+1], split_cell, i); 
 		d_size=blib_partition_size(stuff->part_stack[depth+1]);
-		blib_partition_print(stuff->part_stack[depth+1],stderr);
+		/*blib_partition_print(stuff->part_stack[depth+1],stderr);*/
 		blib_graph_auto_part_refine(stuff,depth+1);
 		stuff->child_cells[depth][i]=blib_partition_cell_count(stuff->part_stack[depth+1]);
 		if(stuff->child_cells[depth][i]<min_cells)

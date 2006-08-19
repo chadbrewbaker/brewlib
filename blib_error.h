@@ -15,7 +15,7 @@ void* blib_error_malloc(size_t size, char* file,int line){
 	void* ptr=malloc(size);
 	if(ptr==NULL){
 		fprintf(stderr,"%s(%d):MALLOC ERROR\n",file,line);
-		exit(0);
+		/*exit(0);*/
 	}
 	return ptr;
 }

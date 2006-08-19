@@ -4,18 +4,27 @@
 #define BLIB_SORT_CUTOFF 25
 
 void blib_sort_brute(int* vals,int* keys,int size, int is_ascending){
-	int i,j,swap_key,swap_val,is_dirty;
+	
+	int i,j,swap_key,swap_val,is_dirty,db1,db2,db3;
+	
+
+	
 	if(is_ascending){
 		for(i=0;i<size;i++){
 			is_dirty=0;
-			for(j=i+1;j<size;j++){
-				if(keys[j-1] >keys[j]){
-					swap_key=keys[j];
-					swap_val=vals[j];
-					keys[j]=keys[j-1];
-					vals[j]=vals[j-1];
-					vals[j-1]=swap_val;
-					keys[j-1]=swap_key;
+			for(j=0;j<size-1;j++){
+				db1=keys[j];
+				db2=keys[j+1];
+				if(keys[j] > keys[j+1]){
+					swap_key=keys[j+1];
+					swap_val=vals[j+1];
+					
+					keys[j+1]=keys[j];
+					vals[j+1]=vals[j];
+					
+					keys[j]=swap_key;
+					vals[j]=swap_val;
+					
 					is_dirty=1;
 				}
 			}
@@ -33,6 +42,7 @@ void blib_sort_brute(int* vals,int* keys,int size, int is_ascending){
 					keys[j]=keys[j-1];
 					vals[j]=vals[j-1];
 					vals[j-1]=swap_val;
+					
 					keys[j-1]=swap_key;
 					is_dirty=1;
 				}
@@ -41,9 +51,28 @@ void blib_sort_brute(int* vals,int* keys,int size, int is_ascending){
 				break;
 		}
 	}
+	
 	return;
 }
 
+void blib_sort_assert(int* keys, int size, int is_ascending){
+	int i,j;
+	if(is_ascending){
+		for(i=0;i<size-1;i++){
+			if(keys[i] > keys[i+1])
+			{BLIB_ERROR("NOT SORTED PROPERLY (%d) (%d)",keys[i],keys[i+1]);
+				
+				
+			}
+		}
+	}
+	else{
+		for(i=0;i<size-1;i++){
+			if(keys[i]<keys[i+1])
+			{BLIB_ERROR("NOT SORTED PROPERLY");}
+		}
+	}
+}
 
 
 void blib_sort(int* arr, int* keys,int size, int is_ascending){
@@ -51,6 +80,8 @@ void blib_sort(int* arr, int* keys,int size, int is_ascending){
 	
 	/*Debug the rest sometime */
 	blib_sort_brute(arr,keys,size,is_ascending);
+	return;
+	
 	
 	if(size<=BLIB_SORT_CUTOFF){
 		blib_sort_brute(arr,keys,size,is_ascending);

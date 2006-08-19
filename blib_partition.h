@@ -36,7 +36,8 @@ void blib_partition_free(blib_partition* part){
 
 int blib_partition_assert(blib_partition* part){
 	int i,sum;
-	
+	/*DANGER WILL ROBINSON THIS IS TURNED OFF*/
+	return 0;
 	if(part==NULL){
 		BLIB_ERROR(" ");
 		return 1;
@@ -196,7 +197,6 @@ int blib_partition_fix_element(blib_partition* part, int cell_index, int element
 	}
 	if(cell_size ==1)
 		return 0;
-	BLIB_ERROR(" ");
 	/*Swap the element to the front of the cell*/
 	temp=part->perm[part->cells[cell_index]];/*what was in front*/
 	part->perm[part->cells[cell_index]]= part->perm[part->cells[cell_index]+element];

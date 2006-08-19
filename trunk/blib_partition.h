@@ -34,10 +34,49 @@ void blib_partition_free(blib_partition* part){
 }
 
 
+int blib_partition_assert(blib_partition* part){
+	int i,sum;
+	
+	if(part==NULL){
+		BLIB_ERROR(" ");
+		return 1;
+	}
+	if(part->perm==NULL || part->cells==NULL){
+		BLIB_ERROR(" ");
+		return 1;
+	}
+	
+	if(part->cell_count>part->size){
+		BLIB_ERROR(" ");
+		return 1;
+	}	
+	if(part->cell_count<0 || part->size<0){
+		BLIB_ERROR(" ");
+		return 1;
+	}
+	sum=0;
+	for(i=1;i<part->cell_count;i++){
+		sum+=part->cells[i]-part->cells[i-1];
+		if(part->cells[i]<=part->cells[i-1]){
+			
+			BLIB_ERROR("(%d) (%d) ",part->cells[i],part->cells[i-1]);
+			
+			return 1;
+		}
+	}
+	sum+=part->size-part->cells[part->cell_count-1];
+	if(sum!=part->size){
+		i=part->cells[0];
+		BLIB_ERROR(" ");
+		return 1;
+	}
+	return 0;	
+}
+
 
 int blib_partition_cell_size(blib_partition* part, int cell_index)
 {
-	if(cell_index > (part->cell_count-1)){
+	if(cell_index >= part->cell_count){
 		BLIB_ERROR(" CELL DOES NOT EXIST");
 		return 99999;
 	}
@@ -51,17 +90,21 @@ int blib_partition_cell_size(blib_partition* part, int cell_index)
 
 int blib_partition_nth_item(blib_partition* part, int n)
 {
+	
+	blib_partition_assert(part);
 	if(n >= part->size){
 		BLIB_ERROR("OUT OF BOUNDS");
 	}
+	blib_partition_assert(part);
+	
 	return part->perm[n];
-	BLIB_ERROR("");
 }
 
 
 /*If second argument is NULL then it allocates a new one*/
 blib_partition* blib_partition_copy(blib_partition* a, blib_partition* b){
 	int i;
+	blib_partition_assert(a);
 	if(b == NULL)
 		b=blib_partition_allocate(a->size);
 	if(b->size != a->size){
@@ -73,16 +116,19 @@ blib_partition* blib_partition_copy(blib_partition* a, blib_partition* b){
 	for(i=0;i<a->size;i++)
 		b->perm[i] = a->perm[i];
 	b->cell_count=a->cell_count;
+	blib_partition_assert(b);
 	return b;
 }
 
 int blib_partition_cell_count(blib_partition* part){
+	blib_partition_assert(part);
 	return part->cell_count;
 }
 
 int blib_partition_front_unit_count(blib_partition* part)
 {
 	int i,count;
+	blib_partition_assert(part);
 	count=0;
 	for(i=0;i<blib_partition_cell_count(part);i++){
 		if(blib_partition_cell_size(part,i)==1)
@@ -97,29 +143,36 @@ int blib_partition_front_unit_count(blib_partition* part)
 
 
 int blib_partition_size(blib_partition* part){
+	blib_partition_assert(part);
 	return part->size;
 }
 
 int blib_partition_get_cell(blib_partition* part, int index, int* value, int* size)
 {
 	int i;
+	blib_partition_assert(part);
 	if(index+1 > part->cell_count){
 		BLIB_ERROR("Out of bounds");
 	}
-	*size= blib_partition_cell_size(part,index);
-	for(i=0;i< *size;i++)
+	(*size)= blib_partition_cell_size(part,index);
+	for(i=0;i< (*size);i++)
 		value[i]=part->perm[ part->cells[index]+i];
+	
+	
 	return 0;
 }
 
 int blib_partition_get_cell_at(blib_partition* part, int index, int* value, int* size)
 {
 	int i,cur_cell;
-	if(index+1 > part->cell_count){
+	
+	blib_partition_assert(part);
+	
+	if(index >= part->size){
 		BLIB_ERROR("Out of bounds");
 	}
 	cur_cell=0;
-	for(i=0;i<part->cell_count;i++){
+	for(i=1;i<part->cell_count;i++){
 		if(index < part->cells[i])
 			break;
 		cur_cell++;
@@ -132,6 +185,8 @@ int blib_partition_get_cell_at(blib_partition* part, int index, int* value, int*
 /*Returns -1 if the element or cell does not exist*/
 int blib_partition_fix_element(blib_partition* part, int cell_index, int element){
 	int i,temp,cell_size;
+	
+	blib_partition_assert(part);
 	if(cell_index > part->cell_count)
 		return -1;
 	cell_size=blib_partition_cell_size(part,cell_index);
@@ -141,7 +196,7 @@ int blib_partition_fix_element(blib_partition* part, int cell_index, int element
 	}
 	if(cell_size ==1)
 		return 0;
-	BLIB_ERROR("");
+	BLIB_ERROR(" ");
 	/*Swap the element to the front of the cell*/
 	temp=part->perm[part->cells[cell_index]];/*what was in front*/
 	part->perm[part->cells[cell_index]]= part->perm[part->cells[cell_index]+element];
@@ -151,6 +206,8 @@ int blib_partition_fix_element(blib_partition* part, int cell_index, int element
 		part->cells[i]=part->cells[i-1];
 	part->cells[cell_index+1]++;
 	part->cell_count++;
+	blib_partition_assert(part);
+	
 	return 0;
 }
 
@@ -162,23 +219,27 @@ int blib_partition_fix_element(blib_partition* part, int cell_index, int element
 void blib_partition_split_by_key(blib_partition* part, int* keys,int* dirty_cell_arr, int* dirty_cells){
 	int i,j,size,cells,index,new_cells,parent_used;
 	/*Split each cell by key*/
+	blib_partition_assert(part);
+	
 	cells=blib_partition_cell_count(part);
-	index=0;new_cells=0; *dirty_cells=0;
+	index=0;new_cells=0;
+	(*dirty_cells)=0;
 	for(i=0;i<cells;i++){
 		size=blib_partition_cell_size(part,i);
-		blib_sort(&part->perm[index],&keys[index],size,1);
+		blib_sort_brute(&part->perm[index],&keys[index],size,1);
+		blib_sort_assert(&keys[index],size,1);
 		parent_used=0;
 		for(j=0;j<size-1;j++){
 			if(keys[index+j]!=keys[index+j+1]){
 				part->cells[cells+new_cells]=index+j+1;
 				if(dirty_cell_arr !=NULL){
 					if(!parent_used){
-						dirty_cell_arr[*dirty_cells]=index;
-						*dirty_cells++;
+						dirty_cell_arr[(*dirty_cells)]=index;
+						(*dirty_cells)++;
 						parent_used=1;
 					}
-					dirty_cell_arr[*dirty_cells]=index+j+1;
-					*dirty_cells++;
+					dirty_cell_arr[(*dirty_cells)]=index+j+1;
+					(*dirty_cells)++;
 				}
 				new_cells++;
 			}
@@ -187,6 +248,8 @@ void blib_partition_split_by_key(blib_partition* part, int* keys,int* dirty_cell
 	}
 	blib_sort(part->cells,part->cells,cells+new_cells,1);
 	part->cell_count=cells+new_cells;
+
+	blib_partition_assert(part);
 }
 
 void blib_partition_get_perm(blib_partition* part, int* value)
@@ -196,7 +259,7 @@ void blib_partition_get_perm(blib_partition* part, int* value)
 		value[i]=part->perm[i];
 }
 void blib_partition_print(blib_partition* part,FILE* stream){
-	int i,j,used,cell_index;
+	int i,j,used;
 	used=0;
 	for(i=0;i<part->cell_count;i++){
 		fprintf(stream,"[");

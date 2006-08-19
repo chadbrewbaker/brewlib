@@ -56,7 +56,7 @@ blib_graph_auto_storage* blib_graph_auto_init( blib_graph* g, blib_schreier* sch
 	stuff->child_cells=BLIB_MALLOC(sizeof(int*)*size);
 	for(i=0;i<size;i++)
 		stuff->child_cells[i]=(int*)BLIB_MALLOC(sizeof(int)*size);
-	stuff->split_stack=blib_cell_stack_allocate(size*10);
+	stuff->split_stack=blib_cell_stack_allocate(size*10,size);
 	stuff->adj_arr =(int*)BLIB_MALLOC(sizeof(int)*size);
 	stuff->graph=g;
 	stuff->schreier=schreier;
@@ -113,7 +113,7 @@ void blib_graph_auto_finalize(blib_graph_auto_storage* stuff,blib_graph* graph,b
 
 void blib_graph_auto_split_cells(blib_graph_auto_storage* stuff,int depth, int split_cell_size)
 {
-	int i,j,k,size,used,cells;
+	int i,j,size,used;
 	/*split each cell based on its counts*/
 	used=0;
 	size=blib_partition_size(stuff->part_stack[depth]);
@@ -133,8 +133,9 @@ void blib_graph_auto_split_cells(blib_graph_auto_storage* stuff,int depth, int s
 
 void blib_graph_auto_part_refine(blib_graph_auto_storage* stuff, int depth)
 {
-	int i,split_cell_size;
+	int i,j,split_cell_size,db0,db1;
 	/*Push cells onto stack*/
+	db1=stuff->split_stack->cells_allocated;
 	blib_error_tabs(depth);fprintf(stderr,"auto_part_refine(%d)BEFORE",depth);
 	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);
 	for(i=blib_partition_cell_count(stuff->part_stack[depth]);i > 0;i--){
@@ -142,11 +143,13 @@ void blib_graph_auto_part_refine(blib_graph_auto_storage* stuff, int depth)
 		stuff->split_stack=blib_cell_stack_push(stuff->split_stack,stuff->scratch_arr, split_cell_size);
 	}
 	/*Pop top element, split cells on it, till stack is empty  */
+	db0=stuff->split_stack->cells_allocated;
 	while(blib_cell_stack_depth(stuff->split_stack)>0){
 		blib_cell_stack_pop(stuff->split_stack, stuff->split_cell, &split_cell_size);
 		/*Put the cell to split on in stuff->split_cell*/
 		blib_graph_auto_split_cells(stuff,depth,split_cell_size);
 		for(i=stuff->dirty_cells-1;i>=0;i--){
+			j=split_cell_size;
 			blib_partition_get_cell_at(stuff->part_stack[depth],stuff->dirty_cell_arr[i],
 									   stuff->scratch_arr,&split_cell_size);
 			stuff->split_stack=blib_cell_stack_push(stuff->split_stack, stuff->scratch_arr,split_cell_size);
@@ -240,7 +243,7 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 {
 	int i,cells,result,split_size,split_cell,min_cells,best_flag;
-	int d_size,d_j;
+	int d_size;
 	/*Assume it is already part_refined  at [depth], so we can write new copies to [depth+1] */
 	blib_error_tabs(depth);fprintf(stderr,"auto_sub(%d)",depth);
 	blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);

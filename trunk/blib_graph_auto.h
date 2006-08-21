@@ -14,6 +14,7 @@
 #define _BLIB_GRAPH_AUTO_DEF_
 
 typedef struct blib_graph_auto_storage_t{
+	int best_part_defined;
 	blib_partition* best_part;
 	blib_partition** part_stack;
 	blib_partition* scratch_part;
@@ -33,12 +34,13 @@ typedef struct blib_graph_auto_storage_t{
 }blib_graph_auto_storage;
 
 
-blib_graph_auto_storage* blib_graph_auto_init( blib_graph* g, blib_schreier* schreier,int* orbits){
+blib_graph_auto_storage* blib_graph_auto_init( blib_graph* g, blib_schreier* schreier,int* orbits, blib_partition* pre_part){
 	int i,size;
 	blib_graph_auto_storage* stuff;
 	size=blib_graph_size(g);
 	stuff=BLIB_MALLOC(sizeof(blib_graph_auto_storage));
-	stuff->best_part=NULL; /*Keep it null and allocate it when we get one*/
+	stuff->best_part_defined=0;
+	stuff->best_part=blib_partition_allocate(size);
 	stuff->old_part=BLIB_MALLOC(sizeof(blib_partition));
 	stuff->dirty_cell_arr=BLIB_MALLOC(sizeof(int)*size);
 	stuff->scratch_part=blib_partition_allocate(size);
@@ -66,9 +68,42 @@ blib_graph_auto_storage* blib_graph_auto_init( blib_graph* g, blib_schreier* sch
 		stuff->orbits=BLIB_MALLOC(sizeof(int)*size);
 	for(i=0;i<size;i++)
 		stuff->orbits[i]=i;
-	BLIB_ERROR("debug");
+	if(pre_part!=NULL){
+		stuff->part_stack[0]=blib_partition_copy(pre_part,stuff->part_stack[0]);
+	}
 	return stuff;
 }
+
+void blib_graph_auto_reset( blib_graph* g, blib_schreier* schreier,int* orbits, blib_partition* pre_part,blib_graph_auto_storage* stuff){
+	int i,size;
+	
+	size=blib_graph_size(g);
+	   
+	if((stuff==NULL)|| (blib_partition_size(stuff->scratch_part)!=size)){
+		BLIB_ERROR("auto storage you passed me was bogus ");
+	}
+
+	stuff->best_part_defined=0;
+	blib_partition_reset(stuff->scratch_part);	
+	for(i=0;i<size;i++)
+		blib_partition_reset(stuff->part_stack[i]);
+	blib_cell_stack_reset(stuff->split_stack);
+	stuff->graph=g;
+	stuff->schreier=schreier;
+	stuff->orbits=orbits;
+ 	/*Start out with every in a different orbit then discover automorphisms*/
+	if(orbits==NULL)
+		stuff->orbits=BLIB_MALLOC(sizeof(int)*size);
+	for(i=0;i<size;i++)
+		stuff->orbits[i]=i;
+	if(pre_part!=NULL){
+		stuff->part_stack[0]=blib_partition_copy(pre_part,stuff->part_stack[0]);
+	}
+}
+
+
+
+
 
 
 void blib_graph_auto_finalize(blib_graph_auto_storage* stuff,blib_graph* graph,blib_schreier* schreier,int* orbits,int* certificate)
@@ -107,6 +142,19 @@ void blib_graph_auto_finalize(blib_graph_auto_storage* stuff,blib_graph* graph,b
 	/* Do we need to do any final orbit calculations?*/
 	free(stuff);
 }
+
+
+void blib_graph_auto_finalize_persistent(blib_graph_auto_storage* stuff,blib_graph* graph,blib_schreier* schreier,int* orbits,int* certificate)
+{
+	int i,size;
+	size=blib_graph_size(graph);
+	if(certificate != NULL){
+		for(i=0;i<size;i++)
+			certificate[i]=blib_partition_nth_item(stuff->best_part,i);
+	}
+}
+
+
 
 
 
@@ -167,7 +215,7 @@ void blib_graph_auto_part_refine(blib_graph_auto_storage* stuff, int depth)
 int blib_graph_auto_part_test(blib_graph_auto_storage* stuff, int depth)
 {
 	int test_fixed,i,j,a,b,src,dest;
-	if(stuff->best_part == NULL)
+	if(!stuff->best_part_defined)
 		return 1;
 	test_fixed=blib_partition_front_unit_count(stuff->part_stack[depth]);	
 	/*Go down the columns of both testing to see who is smallest*/
@@ -193,7 +241,7 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 {
 	int i,j,a,b,min,size;
 	/*blib_partition_print(stuff->part_stack[depth],stderr);*/
-	blib_error_tabs(depth);BLIB_ERROR(" <-recording%d,%d",depth,result);
+	/*blib_error_tabs(depth);BLIB_ERROR(" <-recording%d,%d",depth,result);*/
 	/*Found an automorph so record it*/
 	if(result==0){
 		if(stuff->schreier!=NULL){
@@ -234,8 +282,10 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 		
 	}
 	/*Record it as the new best permutation*/
-	else
+	else{
+		stuff->best_part_defined=1;
 		stuff->best_part=blib_partition_copy(stuff->part_stack[depth],stuff->best_part);
+	}
 	return 0;
 }
 
@@ -246,15 +296,15 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 	int i,cells,result,split_size,split_cell,min_cells,best_flag;
 	int d_size;
 	/*Assume it is already part_refined  at [depth], so we can write new copies to [depth+1] */
-	blib_error_tabs(depth);fprintf(stderr,"auto_sub(%d)",depth);
+	/*blib_error_tabs(depth);fprintf(stderr,"auto_sub(%d)",depth);*/
 	/*blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);*/
-	if(stuff->best_part == NULL)
+	if(!stuff->best_part_defined)
 		best_flag=1;
 	else
 		best_flag=0;
 	cells=blib_partition_cell_count(stuff->part_stack[depth]);
 	result=blib_graph_auto_part_test(stuff,depth);
-	blib_error_tabs(depth);BLIB_ERROR("result was %d",result);
+	/*blib_error_tabs(depth);BLIB_ERROR("result was %d",result);*/
 	/*Worse off so backtrack*/
 	if(result < 0){
 		blib_error_tabs(depth);BLIB_ERROR("Returning %d",result);
@@ -264,7 +314,7 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 	
 	if(cells == blib_graph_size(stuff->graph)){
 		blib_graph_auto_record(stuff,depth,result);
-		blib_error_tabs(depth);BLIB_ERROR("recording and returning %d",result);
+		/*blib_error_tabs(depth);BLIB_ERROR("recording and returning %d",result);*/
 		return result;	
 	}
 	for(i=0;i<cells;i++){
@@ -274,7 +324,7 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 			break;
 		}
 	}
-	blib_error_tabs(depth);BLIB_ERROR("split_cell_size %d",split_size);
+	/*blib_error_tabs(depth);BLIB_ERROR("split_cell_size %d",split_size);*/
 	min_cells=blib_partition_size(stuff->part_stack[depth]);
 	for(i=0;i<split_size;i++){
 		/*Get the size of the partition after fixing each element.*/
@@ -287,7 +337,7 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 		if(stuff->child_cells[depth][i]<min_cells)
 			min_cells=stuff->child_cells[depth][i];
 	}
-	blib_error_tabs(depth);BLIB_ERROR("split_cell_size %d",split_size);
+	/*blib_error_tabs(depth);BLIB_ERROR("split_cell_size %d",split_size);*/
 	for(i=0;i<split_size;i++){
 		if(stuff->child_cells[depth][i]>min_cells)
 			continue;
@@ -305,10 +355,10 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 		}
 	}
 if(best_flag){
-	blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning 1",depth);
+	/*blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning 1",depth);*/
 	return 1;
 }
-blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning -1",depth);
+/*blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning -1",depth);*/
 	return -1;
 }
 
@@ -318,24 +368,26 @@ blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning -1",depth);
   -Want to say "vertex x and vertex y are pre-computed to be automorphic" then pass a schrier rep marking it as so
  
  
- 
- 
- 
 	If you don't want orbits, certificate, or shreier pass a NULL.
 */
-void blib_graph_auto(blib_graph* graph, int* orbits, int* certificate, blib_schreier* schreier){
+void blib_graph_auto(blib_graph* graph, int* orbits, int* certificate, blib_schreier* schreier,blib_partition* pre_part){
 	blib_graph_auto_storage* stuff;
-	stuff=blib_graph_auto_init(graph, schreier,orbits);
-	/*Should probably modify so orbits can take in pre-defined color classes*/
-	BLIB_ERROR(" cells = %d?",blib_partition_cell_count(stuff->part_stack[0]));
-
+	stuff=blib_graph_auto_init(graph, schreier,orbits,pre_part);
 	blib_graph_auto_part_refine(stuff,0);
-	BLIB_ERROR(" cells = %d?",blib_partition_cell_count(stuff->part_stack[0]));
-	BLIB_ERROR("About to sub");
 	blib_graph_auto_sub(stuff,0);
-	BLIB_ERROR("Finalizing and %d",1);
-	
-	BLIB_ERROR("Finalizing");
 	blib_graph_auto_finalize(stuff,graph, schreier,orbits,certificate);
 }
+
+
+void blib_graph_auto_persistent(blib_graph* graph, int* orbits, int* certificate, blib_schreier* schreier,blib_partition* pre_part,blib_graph_auto_storage* stuff)
+{
+	blib_graph_auto_reset(graph,schreier,orbits,pre_part,stuff);
+	blib_graph_auto_part_refine(stuff,0);
+	blib_graph_auto_sub(stuff,0);
+	blib_graph_auto_finalize_persistent(stuff,graph,schreier,orbits,certificate);
+}
+
+
+
+
 #endif /*_BLIB_GRAPH_AUTO_DEF*/

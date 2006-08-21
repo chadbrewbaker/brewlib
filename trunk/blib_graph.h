@@ -30,7 +30,7 @@ void blib_graph_free(blib_graph* g){
 
 int blib_graph_edge(blib_graph* g,int a, int b){
 	if(a >= g->size || b >= g->size){
-		BLIB_ERROR("OUT OF BOUNDS");
+		BLIB_ERROR("OUT OF BOUNDS graph access");
 	}
 	return g->adj[a][b];
 }

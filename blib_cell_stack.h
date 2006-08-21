@@ -73,7 +73,10 @@ blib_cell_stack* blib_cell_stack_allocate( int depth, int cells)
 	return cell_stack;
 }
 
-
+void blib_cell_stack_reset(blib_cell_stack* cell_stack){
+	cell_stack->elts_used=0;
+	cell_stack->cells_used=0;
+}
 
 
 

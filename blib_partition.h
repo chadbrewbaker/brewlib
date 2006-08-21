@@ -33,6 +33,45 @@ void blib_partition_free(blib_partition* part){
 	free(part);
 }
 
+void blib_partition_reset(blib_partition* part){
+	int i;
+	for(i=0;i<blib_partition_size(part);i++){
+		part->perm[i]=i;
+	}
+	part->cells[0]=0;
+	part->cell_count=1;
+}
+
+/*sets the list units to be unit partitions at the front of the list*/
+void blib_partition_bicolor(blib_partition* part, int* units, int length){
+	int i,j,used;
+	/*A hack using cells as storge*/
+	for(i=0;i<blib_partition_size(part);i++){
+		part->cells[i]=1; 
+	}
+	for(i=0;i<length;i++){
+		part->perm[i]=units[i];
+		part->cells[units[i]]=0;
+	}
+	used=length;
+	
+	for(i=0;used<blib_partition_size(part);i++){
+		if(part->cells[i]){
+			part->perm[used]=i;
+			used++;
+		}
+	}
+	part->cells[0];
+	if(length< blib_partition_size(part)){
+		part->cells[1]=length;	
+		part->cell_count=2;
+	}
+	else{
+		part->cell_count=1;		
+	}
+}
+
+
 
 int blib_partition_assert(blib_partition* part){
 	int i,sum;
@@ -269,7 +308,12 @@ void blib_partition_print(blib_partition* part,FILE* stream){
 		}
 		fprintf(stream,"]");
 	}
-	fprintf(stream,"\n");
+	fprintf(stream,"\ndump<");
+	for(i=0;i<blib_partition_size(part);i++){
+		fprintf(stream,"%d, ",part->perm[i]);
+	}
+	fprintf(stream,">\n");
+	
 }
 	
 #endif /*_BLIB_PARTITION_DEF*/

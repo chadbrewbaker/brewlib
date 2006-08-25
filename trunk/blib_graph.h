@@ -76,4 +76,24 @@ blib_graph* blib_graph_copy(blib_graph* a, blib_graph* b){
 	}
 	return b;
 }
+
+
+
+int blib_graph_edge_count(blib_graph* a){
+	int i,j,edges;
+	edges=0;
+	/*dense version*/
+	for(i=0;i<blib_graph_size(a);i++){
+		for(j=i+1;j<blib_graph_size(a);j++){
+			edges++;
+		}
+	}
+	return edges;
+}
+
+
+
+
+
+
 #endif /*_BLIB_GRAPH_DEF_*/

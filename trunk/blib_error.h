@@ -4,6 +4,9 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+int BLIB_DEBUG_ARR[500];
+int BLIB_DEBUG_X;
+
 void blib_error_location(char* file_name,int line){
 	fprintf(stderr,":%s (%d)\n",file_name,line);
 }
@@ -20,6 +23,16 @@ void* blib_error_malloc(size_t size, char* file,int line){
 	return ptr;
 }
 #define BLIB_MALLOC(size) blib_error_malloc(size,__FILE__,__LINE__);
+
+void blib_error_free( void* ptr,char* file, int line){
+	if(ptr==NULL){
+	fprintf(stderr,"%s(%d):FREE ERROR\n",file,line);
+	}
+	else
+		free(ptr);
+}
+#define BLIB_FREE(ptr) blib_error_free(size,__FILE__,__LINE__);
+
 
 void blib_error_tabs(int tabs){
 	int i;

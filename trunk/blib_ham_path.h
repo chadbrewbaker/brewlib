@@ -4,9 +4,58 @@
 #include "blib_graph.h"
 #include "blib_partition.h"
 
+
+int COUNTER=0;
+
 void blib_ham_path_hello_world(int* arr,int size,int* orbits){
-	printf("Howdy(%d,%d->%d)\n",size,arr[0],arr[size-1]);
+	int i;
+	COUNTER++;
+	if(COUNTER%1000 == 0){
+		printf("Howdy(");
+		for(i=0;i<size;i++){
+			printf("%d->",arr[i]);
+		}
+		printf(")\n");
+	}
 }
+/*Dump this badboy to file*/
+/*sizeOgraph, depth, (used),(scratch at 0).... -1, (scratch at 1)...-1,...., (scratch at depth-1)...-1 */
+
+void blib_ham_path_dump(blib_graph* g,int depth, int* used, int** scratch, FILE* dest){
+	int i,j;
+	fprintf(dest,"%d %d\n",blib_graph_size(g),depth);
+	for(i=0;i<depth;i++)
+		fprintf(dest," %d ",used[i]);
+	for(i=0;i<depth;i++){
+		for(j=0;j<blib_graph_size(g);j++){
+			if(scratch[i][j]>=0)
+				fprintf(dest," %d ",j);
+			}
+		fprintf(dest," -1 ");
+	}
+}
+
+void blib_ham_path_load(int* depth, int* used, int** scratch, FILE* src){
+	int i,j,size,tmp;
+	fscanf(src,"%d",&size);
+	fscanf(src,"%d",depth);
+	for(i=0;i<(*depth);i++){
+		fscanf(src,"%d",(&used[i]));
+	}
+	for(i=0;i<(*depth);i++){
+		while(1){
+			fscanf(src,"%d",&tmp);
+			if(tmp>=0){
+				scratch[i][j]=1;
+			}
+			else{
+				break;
+			}
+		}
+	}
+}
+
+
 
 /*Traverse all paths not using the parents again*/
 void blib_ham_path_sub(blib_graph* g, void(*path_func)(int*,int,int*), int depth, int* used, int** scratch,int* orbits,blib_partition* pre_part,blib_graph_auto_storage* stuff)
@@ -17,10 +66,20 @@ void blib_ham_path_sub(blib_graph* g, void(*path_func)(int*,int,int*), int depth
 		/*record the path*/
 		(*path_func)(used,depth,orbits);
 		/*kill off isomorphic ancestors*/
+		for(i=0;i<depth;i++){
+			BLIB_DEBUG_ARR[i]=used[i];
+		}
+		BLIB_DEBUG_ARR[depth]=-1;
+		
 		for(i=1;i<depth-1;i++){
+			BLIB_DEBUG_X=i;
 			/*Color the used verts, then kill automorphs*/
 			/*blib_partition_reset(pre_part);*/
 			/*blib_partition_print(pre_part,stderr);*/
+			
+			
+			/*Bicolor, unitify, or break out an edge colored isomorphism code*/
+			
 			blib_partition_bicolor(pre_part,used,i);
 			/*blib_partition_print(pre_part,stderr);
 			fprintf(stderr,"(");
@@ -28,9 +87,13 @@ void blib_ham_path_sub(blib_graph* g, void(*path_func)(int*,int,int*), int depth
 				fprintf(stderr,"%d, ", used[j]);	
 			}
 			fprintf(stderr,")\n");*/
+			if(blib_partition_assert(pre_part)|| stuff->part_stack[0]->cell_count> blib_graph_size(stuff->graph)){
+				blib_partition_print(pre_part,stderr);
+			}
+			
 			blib_graph_auto_persistent(g,orbits,NULL,NULL,pre_part,stuff);
 			for(j=0;j<blib_graph_size(g);j++){
-				if(orbits[i]<i){
+				if(orbits[j]!=j){
 				scratch[i][j]=-1;	
 				}
 			}

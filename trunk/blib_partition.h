@@ -76,7 +76,7 @@ void blib_partition_bicolor(blib_partition* part, int* units, int length){
 int blib_partition_assert(blib_partition* part){
 	int i,sum;
 	/*DANGER WILL ROBINSON THIS IS TURNED OFF*/
-	return 0;
+	/*return 0;*/
 	if(part==NULL){
 		BLIB_ERROR(" ");
 		return 1;
@@ -286,6 +286,9 @@ void blib_partition_split_by_key(blib_partition* part, int* keys,int* dirty_cell
 		index+=size;
 	}
 	blib_sort(part->cells,part->cells,cells+new_cells,1);
+	if((cells+new_cells)>part->size){
+		BLIB_ERROR(" ");
+	}
 	part->cell_count=cells+new_cells;
 
 	blib_partition_assert(part);

@@ -10,6 +10,12 @@ typedef struct blib_cell_stack_t{
 	int cells_allocated;
 }blib_cell_stack;
 
+
+void blib_cell_stack_print(blib_cell_stack* cell_stack){
+	int i;
+/*Fill this in for debugging purposes*/
+}
+
 int blib_cell_stack_depth(blib_cell_stack* cell_stack){
 	return cell_stack->cells_used;
 }
@@ -34,7 +40,11 @@ int blib_cell_stack_assert(blib_cell_stack* cs){
 		return 1;
 	}
 	if(cs->cells_used > cs->elts_used){
-		BLIB_ERROR(" ");
+		BLIB_ERROR("%d %d %d",cs->elts_allocated,cs->elts_used,cs->cells_used,cs->cells_allocated);
+		
+		BLIB_ERROR("%d %d ",cs->elts_used, cs->elts_allocated);
+		/*Frack the debugger to I can get a trace?*/
+		cs->elts_used=cs->arr_size[9999999];
 		return 1;
 	}
 	if(cs->cells_allocated > cs->elts_allocated){
@@ -174,7 +184,7 @@ blib_cell_stack*  blib_cell_stack_push(blib_cell_stack* cell_stack, int* cell, i
 	cell_stack->cells_used++;
 	
 	if(blib_cell_stack_assert(cell_stack)){
-		BLIB_ERROR(" ");	
+		BLIB_ERROR("(see above error) ");	
 	}
 	return cell_stack;
 }

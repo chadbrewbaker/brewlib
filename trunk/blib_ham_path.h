@@ -10,13 +10,13 @@ int COUNTER=0;
 void blib_ham_path_hello_world(int* arr,int size,int* orbits){
 	int i;
 	COUNTER++;
-	if(COUNTER%1000 == 0){
+	/*if(COUNTER%1000 == 0){*/
 		printf("Howdy(");
 		for(i=0;i<size;i++){
 			printf("%d->",arr[i]);
 		}
 		printf(")\n");
-	}
+	/*}*/
 }
 /*Dump this badboy to file*/
 /*sizeOgraph, depth, (used),(scratch at 0).... -1, (scratch at 1)...-1,...., (scratch at depth-1)...-1 */

@@ -13,7 +13,8 @@ int main(){
 	int verts,x,y;
 	FILE* g_file;
 	
-	g_file=fopen("/tmp/fccgraph.txt","rb");
+	/*g_file=fopen("/tmp/fccgraph.txt","rb");*/
+	g_file=fopen("/tmp/small.txt","rb");
 	if(g_file==NULL)
 	{BLIB_ERROR(" ");}
 	fscanf(g_file,"%d",&verts);

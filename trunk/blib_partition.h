@@ -42,41 +42,19 @@ void blib_partition_reset(blib_partition* part){
 	part->cell_count=1;
 }
 
-/*sets the list units to be unit partitions at the front of the list*/
-void blib_partition_bicolor(blib_partition* part, int* units, int length){
-	int i,j,used;
-	/*A hack using cells as storge*/
-	for(i=0;i<blib_partition_size(part);i++){
-		part->cells[i]=1; 
-	}
-	for(i=0;i<length;i++){
-		part->perm[i]=units[i];
-		part->cells[units[i]]=0;
-	}
-	used=length;
-	
-	for(i=0;used<blib_partition_size(part);i++){
-		if(part->cells[i]){
-			part->perm[used]=i;
-			used++;
-		}
-	}
-	part->cells[0];
-	if(length< blib_partition_size(part)){
-		part->cells[1]=length;	
-		part->cell_count=2;
-	}
-	else{
-		part->cell_count=1;		
-	}
-}
+
+
+
 
 
 
 int blib_partition_assert(blib_partition* part){
 	int i,sum;
 	/*DANGER WILL ROBINSON THIS IS TURNED OFF*/
-	/*return 0;*/
+	
+	return 0;
+	
+	
 	if(part==NULL){
 		BLIB_ERROR(" ");
 		return 1;
@@ -112,6 +90,45 @@ int blib_partition_assert(blib_partition* part){
 	}
 	return 0;	
 }
+
+
+
+/*sets the list units to be unit partitions at the front of the list*/
+void blib_partition_bicolor(blib_partition* part, int* units, int length){
+	int i,j,used;
+	blib_partition_assert(part);
+	/*A hack using cells as storge*/
+	for(i=0;i<blib_partition_size(part);i++){
+		part->cells[i]=1; 
+	}
+	if(length>part->size){
+		BLIB_ERROR(" ");
+	}
+	for(i=0;i<length;i++){
+		part->perm[i]=units[i];
+		part->cells[units[i]]=0;
+	}
+	used=length;
+	
+	for(i=0;used<blib_partition_size(part);i++){
+		/*When we come across a unused place tack it on the end*/
+		if(part->cells[i]){
+			part->perm[used]=i;
+			used++;
+		}
+	}
+	part->cells[0]=0;
+	if(length< blib_partition_size(part)){
+		part->cells[1]=length;	
+		part->cell_count=2;
+	}
+	else{
+		part->cell_count=1;		
+	}
+	blib_partition_assert(part);
+	
+}
+
 
 
 int blib_partition_cell_size(blib_partition* part, int cell_index)
@@ -183,7 +200,6 @@ int blib_partition_front_unit_count(blib_partition* part)
 
 
 int blib_partition_size(blib_partition* part){
-	blib_partition_assert(part);
 	return part->size;
 }
 
@@ -197,7 +213,7 @@ int blib_partition_get_cell(blib_partition* part, int index, int* value, int* si
 	(*size)= blib_partition_cell_size(part,index);
 	for(i=0;i< (*size);i++)
 		value[i]=part->perm[ part->cells[index]+i];
-	
+	blib_partition_assert(part);
 	
 	return 0;
 }
@@ -217,6 +233,7 @@ int blib_partition_get_cell_at(blib_partition* part, int index, int* value, int*
 			break;
 		cur_cell++;
 	}
+
 	return blib_partition_get_cell(part,cur_cell,value,size);
 }
 

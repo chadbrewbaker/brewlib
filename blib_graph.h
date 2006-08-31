@@ -1,62 +1,110 @@
 #ifndef _BLIB_GRAPH_DEF_
 #define _BLIB_GRAPH_DEF_
 #include "blib_error.h"
+
+/* Need to put prototypes here. List of base types I can think of:
+   -main attributes: Dynamic/Static, Sparse/Dense
+        -auxilary attributes: cyclic/interval[lonesum]/disjoint
+   -(Dynamic/Dense)Boolean adjacency matrix (preferably bit packed)
+   -(Dynamic/Dense)adjacency matrix
+   -(Static/very spare)list of edge pairs
+   -(Dynamic/Sparse)adjacency list
+   -(Hybrid/Sparse)unordered adjacency arrays
+   -(Static/Sparse)saad: Compressed row storage. Very space efficent, but not good for updating. struct {val,dest}*, int* row_ptrs
+ */
+
+
+#define BLIB_GRAPH_NO_EDGE_VAL 0
+
 typedef struct blib_graph_t{
 	int size;
 	/*want to make storage generic, but for now hardcode and make general accesors*/
 	int **adj;
+	/*For any edge iterators. We kind of need these to get linear time traversal of sparse graphs*/
+	int itr_src,itr_dest;
+	
 }blib_graph;
 
 
+inline 
+int blib_graph_size(blib_graph* g){
+#ifdef BLIB_DEBUG
+	if(g==NULL){
+		BLIB_ERROR("Accessing a null pointer");
+	}
+#endif
+	return g->size;	
+}
+
+
+inline
+void blib_graph_set_dir_edge( blib_graph* g, int a, int b, int val){
+#ifdef BLIB_DEBUG
+	if(a >= blib_graph_size(g) || b >= blib_graph_size(g) || a<0 || b<0){
+		BLIB_ERROR("OUT OF BOUNDS");
+	}
+#endif
+	g->adj[a][b]=val;
+}
+
+
+void blib_graph_reset(blib_graph* g){
+	int i,j,size;
+	size=blib_graph_size(g);
+	for(i=0;i<size;i++){
+		for(j=0;j<size;j++){
+			blib_graph_set_dir_edge(g,i,j,BLIB_GRAPH_NO_EDGE_VAL);
+		}
+	}
+}
+
+
 blib_graph* blib_graph_allocate(int size){
-	int i;
+	int i,j;
 	blib_graph* g;
 	g=(blib_graph*)BLIB_MALLOC(sizeof(blib_graph));
 	g->size=size;
-	fprintf(stderr,"THe size is %d\n",g->size);
 	g->adj=(int**)BLIB_MALLOC(sizeof(int*)*size);
 	for(i=0;i<size;i++)
 		g->adj[i]=(int*)BLIB_MALLOC(sizeof(int)*size);
+	blib_graph_reset(g);
 	return g;
 }
 
+
 void blib_graph_free(blib_graph* g){
 	int i;
-	for(i=0;i<g->size;i++){
+	for(i=0;i<blib_graph_size(g);i++){
 		free(g->adj[i]);
 	}
 	free(g);
 }
 
+inline
 int blib_graph_edge(blib_graph* g,int a, int b){
-	if(a >= g->size || b >= g->size){
+#ifdef BLIB_DEBUG
+	if(a >= blib_graph_size(g) || b >= blib_graph_size(g) || a<0 || b<0 ){
 		BLIB_ERROR("OUT OF BOUNDS graph access");
 	}
+#endif
 	return g->adj[a][b];
 }
 
-int blib_graph_size(blib_graph* g){
-	return g->size;	
-}
 
-void blib_graph_set_dir_edge( blib_graph* g, int a, int b, int val){
-	if(a >= g->size || b >= g->size){
-		BLIB_ERROR("OUT OF BOUNDS");
-	}
-	g->adj[a][b]=val;
-}
-
+inline
 void blib_graph_set_edge(blib_graph* g, int a, int b, int val){
 	blib_graph_set_dir_edge(g,a,b,val);
 	blib_graph_set_dir_edge(g,b,a,val);
 }
 
-
+inline
 int blib_graph_is_edge(blib_graph* g, int a, int b){
-	if( a> g->size || b>g->size){
+#ifdef BLIB_DEBUG
+	if( a>= blib_graph_size(g) || b>=blib_graph_size(g)|| a<0 || b<0){
 		BLIB_ERROR("Edge out of bounds (%d,%d)",a,b);	
 	}
-	if(blib_graph_edge(g,a,b)!=0)
+#endif
+	if(blib_graph_edge(g,a,b)!=BLIB_GRAPH_NO_EDGE_VAL)
 		return 1;
 	return 0;
 }
@@ -64,19 +112,23 @@ int blib_graph_is_edge(blib_graph* g, int a, int b){
 /*Returns the address of the copy*/
 blib_graph* blib_graph_copy(blib_graph* a, blib_graph* b){
 	int i,j;
+#ifdef BLIB_DEBUG
+	if(a==NULL){
+		BLIB_ERROR(" Copying a null pointer");	
+	}
+#endif
 	if(b==NULL)
 		b=blib_graph_allocate(a->size);
-	if(b->size != a->size){
+	if(blib_graph_size(b) != blib_graph_size(a)){
 		blib_graph_free(b);
-		b=blib_graph_allocate(a->size);
+		b=blib_graph_allocate(blib_graph_size(a));
 	}
-	for(i=0;i<a->size;i++){
-		for(j=0;j<a->size;j++)
-			blib_graph_set_edge(b,i,j, blib_graph_edge(a,i,j));
+	for(i=0;i<blib_graph_size(a);i++){
+		for(j=0;j<blib_graph_size(a);j++)
+			blib_graph_set_dir_edge(b,i,j, blib_graph_edge(a,i,j));
 	}
 	return b;
 }
-
 
 
 int blib_graph_edge_count(blib_graph* a){
@@ -93,6 +145,32 @@ int blib_graph_edge_count(blib_graph* a){
 
 
 
+#ifdef BLIB_UNIT_TEST
+
+void blib_graph_unit(void){
+	blib_graph* g;
+	int i,j;
+	g=blib_graph_allocate(5);
+	if(g==NULL){
+		BLIB_ERROR("Graph didn't allocate");	
+	}
+	for(i=0;i<5;i++){
+		for(j=0;j<5;j++){
+			if(blib_graph_is_edge(g,i,j)){
+				BLIB_ERROR("Graph not set to empty during init");	
+			}
+		}
+	}
+	blib_graph_set_dir_edge(g,2,1,1);
+	if(blib_graph_is_edge(g,1,2) || !blib_graph_is_edge(g,2,1)){
+		BLIB_ERROR("Hey it didn't set just the directed edge!");
+	}
+	blib_graph_free(g);
+	if(g!=NULL){
+		BLIB_ERROR("Hey it didn't free the graph");	
+	}
+}
+#endif
 
 
 

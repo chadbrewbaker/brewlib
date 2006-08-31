@@ -3,12 +3,21 @@
 #include "blib_error.h"
 #include "blib_sort.h"
 #include "blib_error.h"
+
 typedef struct blib_partition_t{
 	int* cells;
 	int* perm;
 	int size;
 	int cell_count;
 }blib_partition;
+
+/*Thread safe temp storage*/
+blib_partition** BLIB_PARTITION_SCRATCH=NULL;
+int BLI_PARTITION_SCRATCH_ALLOCATED=0;
+/*Which are being used*/
+int* BLIB_PARTITION_SCRATCH_IN_USE=0;
+/*Total being used*/
+int BLIB_PARTITION_SCRATCH_USED=0;
 
 blib_partition* blib_partition_allocate(int size){
 	int i;
@@ -33,6 +42,16 @@ void blib_partition_free(blib_partition* part){
 	free(part);
 }
 
+/*Frees all unused global temp storage*/
+void blib_partition_garbage(){
+	/*int i;
+	for(i=0;i<BLIB_PARTITION_SCRATCH_ALLOCATED;i++){
+		if(!BLIB_PARTITION_SCRATCH_IN_USE[i]){
+			blib_partition_free(BLIB_PARTITION_SCRATCH[i]);
+		}
+	}*/
+}
+
 void blib_partition_reset(blib_partition* part){
 	int i;
 	for(i=0;i<blib_partition_size(part);i++){
@@ -42,18 +61,11 @@ void blib_partition_reset(blib_partition* part){
 	part->cell_count=1;
 }
 
-
-
-
-
-
-
 int blib_partition_assert(blib_partition* part){
 	int i,sum;
+
 	/*DANGER WILL ROBINSON THIS IS TURNED OFF*/
-	
 	return 0;
-	
 	
 	if(part==NULL){
 		BLIB_ERROR(" ");
@@ -90,6 +102,55 @@ int blib_partition_assert(blib_partition* part){
 	}
 	return 0;	
 }
+
+void blib_partition_reorder(blib_partition* part, int* new_perm){
+	int i;
+	for(i=0;i<blib_partition_size(part);i++){
+		part->perm[i]=new_perm[i];
+	}
+	blib_partition_assert(part);
+}
+
+void blib_partition_recell(blib_partition* part, int* new_cells, int new_cell_count){
+	int i;
+	for(i=0;i<new_cell_count;i++){
+		part->cells[i]=new_cells[i];
+	}
+	part->cell_count=new_cell_count;
+	blib_partition_assert(part);
+}
+
+
+
+
+void blib_partition_swap_elts(blib_partition* part, int a, int b){
+	int i;
+	for(i=0;i<blib_partition_size(part);i++){
+		
+		if(part->perm[i]==a){
+			part->perm[i]=b;
+		}
+		else{
+			if(part->perm[i]==b)
+				part->perm[i]=a;
+		}
+	}
+}
+
+void blib_partition_resplit(blib_partition* part, int* new_cell_starts, int new_cell_count){
+	int i;
+	for(i=0;i<new_cell_count;i++)
+		part->cells[i]=new_cell_starts[i];
+	part->cell_count=new_cell_count;
+	blib_partition_assert(part);
+}
+
+void blib_partition_swap_cells(blib_partition* part, int a, int b){BLIB_ERROR("NOT IMPLEMENTED");}
+/*Merges cells a and b by getting rid of cell b and tacking it on the end of cell a*/
+void blib_partition_merge_cells(blib_partition* part,int a, int b){BLIB_ERROR("NOT IMPLEMENTED");}
+/*Reverses the ordering of cells*/
+void blib_partition_reverse_cells(blib_partition* part){BLIB_ERROR("NOT IMPLEMENTED");}
+
 
 
 
@@ -147,38 +208,55 @@ int blib_partition_cell_size(blib_partition* part, int cell_index)
 
 int blib_partition_nth_item(blib_partition* part, int n)
 {
-	
-	blib_partition_assert(part);
-	if(n >= part->size){
-		BLIB_ERROR("OUT OF BOUNDS");
-	}
-	blib_partition_assert(part);
-	
+     #ifdef BLIB_DEBUG
+		if(n >= blib_partition_size(part)    || n<0){
+			BLIB_ERROR("index out of bounds");
+		}
+     #endif /*BLIB_DEBUG*/
 	return part->perm[n];
 }
 
 
+int blib_partition_nth_cell(blib_partition* part, int  n){
+    #ifdef BLIB_DEBUG
+	if(n>=blib_partition_size(part) || n<0)
+		BLIB_ERROR("Index out of bounds");
+    #endif
+	return part->cells[n];
+}
+
 /*If second argument is NULL then it allocates a new one*/
 blib_partition* blib_partition_copy(blib_partition* a, blib_partition* b){
 	int i;
-	blib_partition_assert(a);
+    #ifdef BLIB_DEBUG
+	if(a==NULL){
+		BLIB_ERROR("copying a null pointer");	
+	}
+   #endif
+	
 	if(b == NULL)
 		b=blib_partition_allocate(a->size);
 	if(b->size != a->size){
 		blib_partition_free(b);
 		b=blib_partition_allocate(a->size);
+     #ifdef BLIB_DEBUG
+		if(b==NULL){
+			BLIB_ERROR("Couldn't allocate");
+		}
+     #endif
 	}
-	for(i=0;i < a->cell_count;i++)
-		b->cells[i]=a->cells[i];
-	for(i=0;i<a->size;i++)
-		b->perm[i] = a->perm[i];
-	b->cell_count=a->cell_count;
+	for(i=0;i < blib_partition_cell_count(a);i++)
+		b->cells[i]=blib_partition_nth_cell(a,i);
+	for(i=0;i<blib_partition_size(a);i++)
+		b->perm[i] = blib_partition_nth_item(a,i);
+	b->cell_count=blib_partition_cell_count(a);
+    #ifdef BLIB_DEBUG
 	blib_partition_assert(b);
+    #endif
 	return b;
 }
 
 int blib_partition_cell_count(blib_partition* part){
-	blib_partition_assert(part);
 	return part->cell_count;
 }
 
@@ -283,7 +361,9 @@ void blib_partition_split_by_key(blib_partition* part, int* keys,int* dirty_cell
 	for(i=0;i<cells;i++){
 		size=blib_partition_cell_size(part,i);
 		blib_sort_brute(&part->perm[index],&keys[index],size,1);
+#ifdef BLIB_DEBUG
 		blib_sort_assert(&keys[index],size,1);
+#endif
 		parent_used=0;
 		for(j=0;j<size-1;j++){
 			if(keys[index+j]!=keys[index+j+1]){
@@ -303,9 +383,11 @@ void blib_partition_split_by_key(blib_partition* part, int* keys,int* dirty_cell
 		index+=size;
 	}
 	blib_sort(part->cells,part->cells,cells+new_cells,1);
+#ifdef BLIB_DEBUG
 	if((cells+new_cells)>part->size){
 		BLIB_ERROR(" ");
 	}
+#endif
 	part->cell_count=cells+new_cells;
 
 	blib_partition_assert(part);
@@ -336,4 +418,101 @@ void blib_partition_print(blib_partition* part,FILE* stream){
 	
 }
 	
+
+#ifdef BLIB_UNIT_TEST
+/*checks allocate,free,size,nth_item*/
+
+void blib_partition_allocate_unit(void){
+	blib_partition* part;
+	int i;
+	part=blib_partition_allocate(30);
+	if(part==NULL){
+		BLIB_ERROR("didn't allocate");
+	}
+	if(blib_partition_size(part)!=30){
+		BLIB_ERROR("Either alloc or size is whack");
+	}
+	for(i=0;i<blib_partition_size(part);i++){
+		if(blib_partition_nth_item(part,i)!=i){
+			BLIB_ERROR("Nth item is hosed");
+		}
+	}
+	blib_partition_free(part);
+}
+/*Tests reset*/
+void blib_partition_reset_unit (){
+	int i;
+	blib_partition* part;
+	part=blib_partition_allocate(30);
+	part->cell_count=999;
+	part->perm[3]=66;
+	blib_partition_reset(part);
+	for(i=0;i<blib_partition_size(part);i++){
+		if(part->perm[i]!=i){
+			BLIB_ERROR(" Didn't set properly");
+		}
+	}
+	if(part->cell_count !=1){
+		BLIB_ERROR("didn't reset cells");
+	}
+	if(part->cells[0]!=0){
+		BLIB_ERROR("didn't reset first cell to 0");
+	}
+	blib_partition_free(part);
+}
+
+void blib_partition_reorder_unit(void){
+	blib_partition* part;
+	int i;
+	int order[]={4,2,3,1,0};
+	part=blib_partition_allocate(5);
+	blib_partition_reorder(part,order);
+	for(i=0;i<blib_partition_size(part);i++){
+		if(blib_partition_nth_item(part,i)!=order[i]){
+			BLIB_ERROR("It didn't reorder properly");
+		}
+	}
+	blib_partition_free(part);
+}
+
+void blib_partition_recell_unit(void){
+	blib_partition* part;
+	int i;
+	int new_cells[]={0,2,3,4};
+	blib_partition_allocate(5);
+	blib_partition_recell(part,new_cells,4);
+	for(i=0;i<4;i++){
+		if(part->cells[i]!=new_cells[i]){
+			BLIB_ERROR(" cells not copied properly");	
+		}
+	}
+	blib_partition_free(part);
+}
+
+void blib_partition_swap_elts_unit(void){
+	int i;
+	blib_partition* part;
+	
+	part=blib_partition_allocate(10);
+	blib_partition_swap_elts(part,0,9);
+	if((part->perm[0]!=9)   || (part->perm[9]!=0)){
+		BLIB_ERROR("Didn't swap");
+	}
+	blib_partition_free(part);
+}
+
+
+
+blib_partition_unit(){
+	blib_partition_allocate_unit();
+	blib_partition_reset_unit();
+	blib_partition_reorder_unit();
+	blib_partition_recell_unit();
+	blib_partition_swap_elts_unit();
+
+}
+#endif
+
+
+
 #endif /*_BLIB_PARTITION_DEF*/

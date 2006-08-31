@@ -3,6 +3,7 @@
 */
 
 #include "blib_partition.h"
+#include "blib_graph.h"
 #include "blib_cell_stack.h"
 #include "blib_schreier.h"
 #include "blib_error.h"
@@ -334,6 +335,15 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 		best_flag=1;
 	else
 		best_flag=0;
+	
+	 if(depth<=5){
+	BLIB_ERROR("perm(%d),depth[%d],cell_count(%d)",  (stuff->part_stack[depth])->perm[depth],depth,stuff->part_stack[depth]->cell_count);
+	
+	blib_partition_print(stuff->part_stack[depth],stderr);
+	BLIB_ERROR("---------");
+	}
+	
+	
 	cells=blib_partition_cell_count(stuff->part_stack[depth]);
 	if(cells>blib_graph_size(stuff->graph)){
 		blib_partition_print(stuff->part_stack[depth],stderr);
@@ -454,11 +464,47 @@ void blib_graph_auto_edge_colored(blib_graph* g, int* orbs){
 	/*partition edge color classes*/
 	/*Run graph auto*/
 	/*return the orbits of the vertex verticies as normal*/
-		
-	
-	
-	
-	
 }
+
+#ifdef BLIB_UNIT_TEST
+
+
+void blib_graph_auto_unit(void){
+	int check_orb[]={0, 1, 1, 3, 4, 5, 5, 7, 8, 9, 9, 8, 7, 5, 5, 4, 3, 1, 1, 0};
+	int fcc_graph[]={1, 2,1, 3,1, 5,1, 6,1, 7,1, 8,2, 1,2, 4,2, 6,2, 8,3, 1,3, 4,3, 7,
+3, 8,4, 2,4, 3,4, 8,5, 1,5, 6,5, 7,5, 9,5, 10,5, 11,5, 12,
+6, 1,6, 2,6, 5,6, 8,6, 10,6, 12,7, 1,7, 3,7, 5,7, 8,7, 11,
+7, 12,8, 1,8, 2,8, 3,8, 4,8, 6,8, 7,8, 12,
+9, 5,9, 10,9, 11,9, 13,9, 14,9, 15,9, 16,10, 5,
+10, 6,10, 9,10, 12,10, 14,10, 16,11, 5,11, 7,11, 9,
+11, 12,11, 15,11, 16,12, 5,12, 6,12, 7,12, 8,12, 10,
+12, 11,12, 16,13, 9,13, 14,13, 15,13, 17,13, 18,13, 19,
+13, 20,14, 9,14,10,14, 13,14, 16,14, 18,14, 20,15, 9,
+15, 11,15, 13,15, 16,15, 19,15, 20,16, 9,16, 10,16, 11,16, 12,
+16, 14,16, 15,16, 20,17, 13,17, 18,17, 19,18, 13,18, 14,
+18, 17,18, 20,19, 13,19, 15,19, 17,19, 20,20, 13,20, 14,
+20, 15,20, 16,20, 18,20, 19,-1};
+	int i,j,k,index;
+	int orbits[20];
+	blib_graph* g;
+	blib_graph_auto_storage* stuff;
+	g=blib_graph_allocate(20);
+	index=0;
+	while(1){
+		i=fcc_graph[index];
+		if(i<0) break;
+		j=fcc_graph[index+1];
+		blib_graph_set_edge(g,i-1,j-1,1);
+		index+=2;
+	}
+	blib_graph_auto(g,orbits, NULL, NULL,NULL);
+	for(i=0;i<20;i++){
+		if(orbits[i]!=check_orb[i]){
+			BLIB_ERROR("BAD ORBITS!!");
+		}
+	}
+}
+
+#endif
 
 #endif /*_BLIB_GRAPH_AUTO_DEF*/

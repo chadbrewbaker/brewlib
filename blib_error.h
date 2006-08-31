@@ -11,12 +11,19 @@ void blib_error_location(char* file_name,int line){
 	fprintf(stderr,":%s (%d)\n",file_name,line);
 }
 
-
 #define BLIB_ERROR(...) fprintf(stderr,__VA_ARGS__);blib_error_location(__FILE__,__LINE__);fflush(stderr);
 
 void* blib_error_malloc(size_t size, char* file,int line){
 	void* ptr=malloc(size);
 	if(ptr==NULL){
+		/*
+		Attempt to free some temp storage
+		  blib_garbage();
+		 ptr=malloc(size);
+		 if(ptr!=NULL)
+		   return ptr;
+		 */
+		
 		fprintf(stderr,"%s(%d):MALLOC ERROR\n",file,line);
 		/*exit(0);*/
 	}
@@ -26,7 +33,7 @@ void* blib_error_malloc(size_t size, char* file,int line){
 
 void blib_error_free( void* ptr,char* file, int line){
 	if(ptr==NULL){
-	fprintf(stderr,"%s(%d):FREE ERROR\n",file,line);
+	fprintf(stderr,"%s(%d):You tried to free an empty pointer\n",file,line);
 	}
 	else
 		free(ptr);

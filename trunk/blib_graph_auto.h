@@ -22,7 +22,7 @@ typedef struct blib_graph_auto_storage_t{
 	blib_partition* best_part;
 	blib_partition** part_stack;
 	blib_partition* scratch_part;
-	blib_partition* old_part;
+	/*blib_partition* old_part;*/
 	int** set_stack;
 	int* split_cell;
 	int* dirty_cell_arr;
@@ -45,7 +45,7 @@ blib_graph_auto_storage* blib_graph_auto_init( blib_graph* g, blib_schreier* sch
 	stuff=BLIB_MALLOC(sizeof(blib_graph_auto_storage));
 	stuff->best_part_defined=0;
 	stuff->best_part=blib_partition_allocate(size);
-	stuff->old_part=BLIB_MALLOC(sizeof(blib_partition));
+	/* stuff->old_part=blib_partition_allocate(size); */
 	stuff->dirty_cell_arr=BLIB_MALLOC(sizeof(int)*size);
 	stuff->scratch_part=blib_partition_allocate(size);
 	stuff->part_stack=BLIB_MALLOC(sizeof(blib_partition*)*size);
@@ -124,7 +124,7 @@ void blib_graph_auto_finalize(blib_graph_auto_storage* stuff,blib_graph* graph,b
 			certificate[i]=blib_partition_nth_item(stuff->best_part,i);
 	}
 	blib_partition_free(stuff->best_part);
-	blib_partition_free(stuff->old_part);
+	/*blib_partition_free(stuff->old_part);*/
 	for(i=0;i<size;i++)
 		blib_partition_free(stuff->part_stack[i]);
 	free(stuff->part_stack);
@@ -137,7 +137,6 @@ void blib_graph_auto_finalize(blib_graph_auto_storage* stuff,blib_graph* graph,b
 	for(i=0;i<size;i++)
 		free(stuff->scratch_stack[i]);
 	free(stuff->scratch_stack);
-	
 	for(i=0;i<size;i++)
 		free(stuff->child_cells[i]);
 	free(stuff->child_cells);
@@ -343,7 +342,6 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 	BLIB_ERROR("---------");
 	}
 	
-	
 	cells=blib_partition_cell_count(stuff->part_stack[depth]);
 	if(cells>blib_graph_size(stuff->graph)){
 		blib_partition_print(stuff->part_stack[depth],stderr);
@@ -469,7 +467,7 @@ void blib_graph_auto_edge_colored(blib_graph* g, int* orbs){
 #ifdef BLIB_UNIT_TEST
 
 
-void blib_graph_auto_unit(void){
+int blib_graph_auto_unit(void){
 	int check_orb[]={0, 1, 1, 3, 4, 5, 5, 7, 8, 9, 9, 8, 7, 5, 5, 4, 3, 1, 1, 0};
 	int fcc_graph[]={1, 2,1, 3,1, 5,1, 6,1, 7,1, 8,2, 1,2, 4,2, 6,2, 8,3, 1,3, 4,3, 7,
 3, 8,4, 2,4, 3,4, 8,5, 1,5, 6,5, 7,5, 9,5, 10,5, 11,5, 12,
@@ -484,10 +482,11 @@ void blib_graph_auto_unit(void){
 16, 14,16, 15,16, 20,17, 13,17, 18,17, 19,18, 13,18, 14,
 18, 17,18, 20,19, 13,19, 15,19, 17,19, 20,20, 13,20, 14,
 20, 15,20, 16,20, 18,20, 19,-1};
-	int i,j,k,index;
+	int i,j,k,index,fail;
 	int orbits[20];
 	blib_graph* g;
 	blib_graph_auto_storage* stuff;
+	fail=0;
 	g=blib_graph_allocate(20);
 	index=0;
 	while(1){
@@ -501,8 +500,26 @@ void blib_graph_auto_unit(void){
 	for(i=0;i<20;i++){
 		if(orbits[i]!=check_orb[i]){
 			BLIB_ERROR("BAD ORBITS!!");
+			fail=1;
 		}
 	}
+	stuff=blib_graph_auto_init(g,NULL,orbits,NULL);
+	blib_graph_auto_persistent(g,orbits,NULL,NULL,NULL,stuff);
+	for(i=0;i<20;i++){
+		if(orbits[i]!=check_orb[i]){
+			BLIB_ERROR("BAD ORBITS!!");
+			fail=1;
+		}
+	}	
+	blib_graph_auto_persistent(g,orbits,NULL,NULL,NULL,stuff);
+	for(i=0;i<20;i++){
+		if(orbits[i]!=check_orb[i]){
+			BLIB_ERROR("BAD ORBITS!!");
+			fail=1;
+		}
+	}	
+	blib_graph_auto_finalize(stuff,g,NULL,orbits,NULL);
+	return fail;
 }
 
 #endif

@@ -9,16 +9,28 @@
 #include "blib_graph.h"
 #include "blib_graph_transform.h"
 
+int BLIB_UNIT_PASS_COUNT,BLIB_UNIT_FAIL_COUNT;
+
+void blib_unit_report(int i,char* test_name){
+	if(!i){
+		printf("Passed %s\n",test_name);
+		BLIB_UNIT_PASS_COUNT++;
+	}
+	else{
+		printf("Failed %s\n",test_name);
+		BLIB_UNIT_FAIL_COUNT++;
+	}
+}
+
 void blib_unit_test(void){
-	blib_partition_unit();
-	BLIB_ERROR("Finished partition unit tests");
-	blib_graph_unit();
-	BLIB_ERROR("Finished graph unit tests");
-	blib_graph_auto_unit();
-	BLIB_ERROR("Finished graph_auto unit tests");
-	blib_graph_transform_unit();
-	BLIB_ERROR("Finished graph_transform tests");
-	BLIB_ERROR("Finished all unit tests");
+	int fail=0;
+	BLIB_UNIT_PASS_COUNT=BLIB_UNIT_FAIL_COUNT=0;
+	printf("Starting Unit tests\n");
+	blib_unit_report(blib_partition_unit(),"partition");
+	blib_unit_report(blib_graph_unit(),"graph");
+	blib_unit_report(blib_graph_auto_unit(),"graph_auto");
+	blib_unit_report(blib_graph_transform_unit(),"graph_transform");
+	printf("Passed %d, Failed %d\n",BLIB_UNIT_PASS_COUNT,BLIB_UNIT_FAIL_COUNT);
 }
 
 #endif

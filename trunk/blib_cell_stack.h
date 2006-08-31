@@ -203,11 +203,11 @@ int blib_cell_stack_pop(blib_cell_stack* cell_stack, int* cell,int* cell_size)
 	}
 	cell_stack->cells_used--;
 	cell_stack->elts_used -= (*cell_size);
-	
+#ifdef BLIB_DEBUG
 	if(blib_cell_stack_assert(cell_stack)){
 		BLIB_ERROR(" ");	
 	}
-	
+#endif
 	return 0;
 }
 #endif /*_BLIB_CELL_STACK_DEF_*/

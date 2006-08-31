@@ -410,39 +410,47 @@ void blib_partition_print(blib_partition* part,FILE* stream){
 		}
 		fprintf(stream,"]");
 	}
-	fprintf(stream,"\ndump<");
+	fprintf(stream,"\n");
+#ifdef BLIB_DEBUG
+	fprintf(stream,"\ndumping the permutation<");
 	for(i=0;i<blib_partition_size(part);i++){
 		fprintf(stream,"%d, ",part->perm[i]);
 	}
 	fprintf(stream,">\n");
-	
+#endif
 }
 	
 
 #ifdef BLIB_UNIT_TEST
 /*checks allocate,free,size,nth_item*/
 
-void blib_partition_allocate_unit(void){
+int blib_partition_allocate_unit(void){
 	blib_partition* part;
-	int i;
+	int i,fail;
+	fail=0;
 	part=blib_partition_allocate(30);
 	if(part==NULL){
 		BLIB_ERROR("didn't allocate");
+		fail=1;
 	}
 	if(blib_partition_size(part)!=30){
 		BLIB_ERROR("Either alloc or size is whack");
+		fail=1;
 	}
 	for(i=0;i<blib_partition_size(part);i++){
 		if(blib_partition_nth_item(part,i)!=i){
 			BLIB_ERROR("Nth item is hosed");
+			fail=1;
 		}
 	}
 	blib_partition_free(part);
+	return fail;
 }
 /*Tests reset*/
-void blib_partition_reset_unit (){
-	int i;
+int blib_partition_reset_unit (){
+	int i,fail;
 	blib_partition* part;
+	fail=0;
 	part=blib_partition_allocate(30);
 	part->cell_count=999;
 	part->perm[3]=66;
@@ -450,66 +458,94 @@ void blib_partition_reset_unit (){
 	for(i=0;i<blib_partition_size(part);i++){
 		if(part->perm[i]!=i){
 			BLIB_ERROR(" Didn't set properly");
+			fail=1;
 		}
 	}
 	if(part->cell_count !=1){
 		BLIB_ERROR("didn't reset cells");
+		fail=1;
 	}
 	if(part->cells[0]!=0){
 		BLIB_ERROR("didn't reset first cell to 0");
+		fail=1;
 	}
 	blib_partition_free(part);
+	return fail;
 }
 
-void blib_partition_reorder_unit(void){
+int blib_partition_reorder_unit(void){
 	blib_partition* part;
-	int i;
+	int i,fail;
 	int order[]={4,2,3,1,0};
+	fail=0;
 	part=blib_partition_allocate(5);
 	blib_partition_reorder(part,order);
 	for(i=0;i<blib_partition_size(part);i++){
 		if(blib_partition_nth_item(part,i)!=order[i]){
 			BLIB_ERROR("It didn't reorder properly");
+			fail=1;
 		}
 	}
 	blib_partition_free(part);
+	return fail;
 }
 
-void blib_partition_recell_unit(void){
+int blib_partition_recell_unit(void){
 	blib_partition* part;
-	int i;
+	int i,fail;
 	int new_cells[]={0,2,3,4};
-	blib_partition_allocate(5);
+	fail=0;
+	part=blib_partition_allocate(5);
 	blib_partition_recell(part,new_cells,4);
 	for(i=0;i<4;i++){
 		if(part->cells[i]!=new_cells[i]){
 			BLIB_ERROR(" cells not copied properly");	
+			fail=1;
 		}
 	}
 	blib_partition_free(part);
+	return fail;
 }
 
-void blib_partition_swap_elts_unit(void){
-	int i;
+int blib_partition_swap_elts_unit(void){
+	int i,fail;
 	blib_partition* part;
-	
+	fail=0;
 	part=blib_partition_allocate(10);
 	blib_partition_swap_elts(part,0,9);
 	if((part->perm[0]!=9)   || (part->perm[9]!=0)){
 		BLIB_ERROR("Didn't swap");
+		fail=1;
 	}
 	blib_partition_free(part);
+	return fail;
 }
 
 
 
-blib_partition_unit(){
-	blib_partition_allocate_unit();
-	blib_partition_reset_unit();
-	blib_partition_reorder_unit();
-	blib_partition_recell_unit();
-	blib_partition_swap_elts_unit();
-
+int blib_partition_unit(){
+	int i=0;
+	if(blib_partition_allocate_unit()){
+		i=1;
+		BLIB_ERROR("Failure");
+	}
+	if(blib_partition_reset_unit()){
+		i=1;
+		BLIB_ERROR("Failure");
+	}
+	if(blib_partition_reorder_unit()){
+		i=1;
+		BLIB_ERROR("Failure")
+	}
+	if(blib_partition_recell_unit()){
+		i=1;
+		BLIB_ERROR("Failure");
+	}
+	if(blib_partition_swap_elts_unit()){
+		i=1;
+		BLIB_ERROR("Failure");
+	}
+	return i;
 }
 #endif
 

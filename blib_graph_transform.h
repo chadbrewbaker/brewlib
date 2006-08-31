@@ -52,7 +52,7 @@ blib_graph* blib_graph_transform_line_graph(blib_graph* g){
 
 #ifdef BLIB_UNIT_TEST
 
-void blib_graph_transform_unit(void){
+int blib_graph_transform_unit(void){
 	int fcc_graph[]={1, 2,1, 3,1, 5,1, 6,1, 7,1, 8,2, 1,2, 4,2, 6,2, 8,3, 1,3, 4,3, 7,
 		3, 8,4, 2,4, 3,4, 8,5, 1,5, 6,5, 7,5, 9,5, 10,5, 11,5, 12,
 		6, 1,6, 2,6, 5,6, 8,6, 10,6, 12,7, 1,7, 3,7, 5,7, 8,7, 11,
@@ -66,9 +66,10 @@ void blib_graph_transform_unit(void){
 		16, 14,16, 15,16, 20,17, 13,17, 18,17, 19,18, 13,18, 14,
 		18, 17,18, 20,19, 13,19, 15,19, 17,19, 20,20, 13,20, 14,
 		20, 15,20, 16,20, 18,20, 19,-1};
-	int i,j,k,index,size;
+	int i,j,k,index,size,fail;
 	blib_graph* g;
 	blib_graph* eg;
+	fail=0;
 	g=blib_graph_allocate(20);
 	index=0;
 	while(1){
@@ -82,14 +83,17 @@ void blib_graph_transform_unit(void){
 	eg=blib_graph_transform_edge_adorn(g);
 	if(eg==NULL){
 		BLIB_ERROR("Failed to allocate");
+		fail=1;
 	}
 	if(blib_graph_size(eg)!= blib_graph_size(g)+blib_graph_edge_count(g)  ){
 		BLIB_ERROR("The size is wrong!");
+		fail=1;
 	}
 	for(i=0;i<blib_graph_size(g);i++){
 		for(j=0; j<blib_graph_size(g);j++){
 			if(blib_graph_edge(eg,i,j)||blib_graph_edge(eg,i,j)){
 				BLIB_ERROR("Silly rabbit the adorned graph is bipartite (%d,%d)",i,j)
+				fail=1;
 			}
 		}
 	}
@@ -100,6 +104,7 @@ void blib_graph_transform_unit(void){
 			if(blib_graph_is_edge(g,i,j)){
 				if(!blib_graph_is_edge(eg,i,size+index) || !blib_graph_is_edge(eg,size+index,j)){
 					BLIB_ERROR("Failed to make edges(%d,[%d],%d)",i,size+index,j)
+					fail=1;
 				}
 				index++;
 			}
@@ -109,13 +114,13 @@ void blib_graph_transform_unit(void){
 		for(j=i+1;j<blib_graph_size(eg);j++){
 			if(blib_graph_is_edge(eg,i,j)){
 				BLIB_ERROR("Error edges ([%d],[%d]) don't touch!",i,j);
+				fail=1;
 			}
 		}
 	}
-	
-	
-	free(g);
-	free(eg);
+	blib_graph_free(g);
+	blib_graph_free(eg);
+	return fail;
 }
 
 #endif

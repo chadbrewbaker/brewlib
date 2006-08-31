@@ -147,28 +147,34 @@ int blib_graph_edge_count(blib_graph* a){
 
 #ifdef BLIB_UNIT_TEST
 
-void blib_graph_unit(void){
+int blib_graph_unit(void){
 	blib_graph* g;
-	int i,j;
+	int i,j,fail;
+	fail=0;
 	g=blib_graph_allocate(5);
 	if(g==NULL){
 		BLIB_ERROR("Graph didn't allocate");	
+		fail=1;
 	}
 	for(i=0;i<5;i++){
 		for(j=0;j<5;j++){
 			if(blib_graph_is_edge(g,i,j)){
 				BLIB_ERROR("Graph not set to empty during init");	
+				fail=1;
 			}
 		}
 	}
 	blib_graph_set_dir_edge(g,2,1,1);
 	if(blib_graph_is_edge(g,1,2) || !blib_graph_is_edge(g,2,1)){
 		BLIB_ERROR("Hey it didn't set just the directed edge!");
+		fail=1;
 	}
 	blib_graph_free(g);
+	/* Question how do we test to see if something is free?
 	if(g!=NULL){
 		BLIB_ERROR("Hey it didn't free the graph");	
-	}
+	}*/
+	return fail;
 }
 #endif
 

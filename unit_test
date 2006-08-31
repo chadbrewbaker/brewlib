@@ -1,0 +1,6 @@
+#!/bin/bash
+gcc blib_unit_test.c
+./a.out  >test.out 2>>test.err
+gcc blib_unit_test.c -O3
+./a.out >> test.out 2>> test.err
+

@@ -12,7 +12,6 @@ typedef struct blib_cell_stack_t{
 
 
 void blib_cell_stack_print(blib_cell_stack* cell_stack){
-	int i;
 /*Fill this in for debugging purposes*/
 }
 
@@ -40,7 +39,7 @@ int blib_cell_stack_assert(blib_cell_stack* cs){
 		return 1;
 	}
 	if(cs->cells_used > cs->elts_used){
-		BLIB_ERROR("%d %d %d",cs->elts_allocated,cs->elts_used,cs->cells_used,cs->cells_allocated);
+		BLIB_ERROR("%d %d %d %d",cs->elts_allocated,cs->elts_used,cs->cells_used,cs->cells_allocated);
 		
 		BLIB_ERROR("%d %d ",cs->elts_used, cs->elts_allocated);
 		/*Frack the debugger to I can get a trace?*/

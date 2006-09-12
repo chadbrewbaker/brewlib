@@ -52,6 +52,12 @@ void blib_partition_garbage(){
 	}*/
 }
 
+
+
+int blib_partition_size(blib_partition* part){
+	return part->size;
+}
+
 void blib_partition_reset(blib_partition* part){
 	int i;
 	for(i=0;i<blib_partition_size(part);i++){
@@ -156,7 +162,7 @@ void blib_partition_reverse_cells(blib_partition* part){BLIB_ERROR("NOT IMPLEMEN
 
 /*sets the list units to be unit partitions at the front of the list*/
 void blib_partition_bicolor(blib_partition* part, int* units, int length){
-	int i,j,used;
+	int i,used;
 	blib_partition_assert(part);
 	/*A hack using cells as storge*/
 	for(i=0;i<blib_partition_size(part);i++){
@@ -225,6 +231,11 @@ int blib_partition_nth_cell(blib_partition* part, int  n){
 	return part->cells[n];
 }
 
+
+int blib_partition_cell_count(blib_partition* part){
+	return part->cell_count;
+}
+
 /*If second argument is NULL then it allocates a new one*/
 blib_partition* blib_partition_copy(blib_partition* a, blib_partition* b){
 	int i;
@@ -256,9 +267,6 @@ blib_partition* blib_partition_copy(blib_partition* a, blib_partition* b){
 	return b;
 }
 
-int blib_partition_cell_count(blib_partition* part){
-	return part->cell_count;
-}
 
 int blib_partition_front_unit_count(blib_partition* part)
 {
@@ -272,13 +280,6 @@ int blib_partition_front_unit_count(blib_partition* part)
 			break;
 	}
 	return count;
-}
-
-
-
-
-int blib_partition_size(blib_partition* part){
-	return part->size;
 }
 
 int blib_partition_get_cell(blib_partition* part, int index, int* value, int* size)
@@ -419,7 +420,29 @@ void blib_partition_print(blib_partition* part,FILE* stream){
 	fprintf(stream,">\n");
 #endif
 }
-	
+
+void blib_partition_print_dreadnaut(blib_partition* part,FILE* stream){
+	int i,j,used;
+	fprintf(stream,"f=[");
+	used=0;
+	for(i=0;i<part->cell_count;i++){
+		if(i!=0){
+			fprintf(stream,"|");
+		}
+		for(j=0;j<blib_partition_cell_size(part,i);j++){
+			if(j!=0){
+				fprintf(stream,", ");
+			}
+			fprintf(stream,"%d",part->perm[used]);
+			used++;	
+		}
+	}
+	fprintf(stream,"]\n");
+}	
+
+
+
+
 
 #ifdef BLIB_UNIT_TEST
 /*checks allocate,free,size,nth_item*/
@@ -508,7 +531,7 @@ int blib_partition_recell_unit(void){
 }
 
 int blib_partition_swap_elts_unit(void){
-	int i,fail;
+	int fail;
 	blib_partition* part;
 	fail=0;
 	part=blib_partition_allocate(10);

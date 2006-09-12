@@ -63,6 +63,7 @@ void blib_ham_path_sub(blib_graph* g,blib_graph* eg,void(*path_func)(int*,int,in
 					   blib_partition* pre_part,blib_graph_auto_storage* gstuff, blib_graph_auto_storage* egstuff,int* checked_for_auts)
 {
 	int i,j,k,l,edge_counter;
+	FILE* out_file;
 	/*vused,vunused,eused,eunused*/
 	/*depth,(size-depth),depth-1, everything else*/
 	int new_cells[4];
@@ -104,7 +105,7 @@ void blib_ham_path_sub(blib_graph* g,blib_graph* eg,void(*path_func)(int*,int,in
 						for(l=1;l<=i;l++){
 							/*Mark this "edge" as used in the ham path*/
 							if((used[l-1]==j && used[l]==k) || (used[l-1]==k && used[l]==j)){
-								orbits[edge_counter]=1;
+								orbits[blib_graph_size(g)+edge_counter]=1;
 								break;
 							}
 						}
@@ -157,6 +158,13 @@ void blib_ham_path_sub(blib_graph* g,blib_graph* eg,void(*path_func)(int*,int,in
 			blib_partition_recell(pre_part,new_cells,new_cell_count);
 			blib_partition_print(pre_part,stderr);
 			BLIB_ERROR("Calling Auto");
+			out_file=fopen("larry.gr","w");
+			BLIB_ERROR("is it null(%d)",out_file==NULL);
+			blib_graph_print_dreadnaut(eg,out_file);
+			blib_partition_print_dreadnaut(pre_part,out_file);
+			fprintf(out_file,"x\no\n");
+			BLIB_ERROR(" ");
+			fclose(out_file);
 			blib_graph_auto_persistent(eg,orbits,NULL,NULL,pre_part,egstuff);
 			checked_for_auts[i]=1;
 			for(j=0;j<blib_graph_size(g);j++){

@@ -23,7 +23,6 @@ void blib_unit_report(int i,char* test_name){
 }
 
 void blib_unit_test(void){
-	int fail=0;
 	BLIB_UNIT_PASS_COUNT=BLIB_UNIT_FAIL_COUNT=0;
 	printf("Starting Unit tests\n");
 	blib_unit_report(blib_partition_unit(),"partition");

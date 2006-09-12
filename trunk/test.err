@@ -1,270 +1,1464 @@
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+In file included from blib_unit_test.h:7,
+                 from blib_unit_test.c:3:
+blib_partition.h: In function 'blib_partition_reset':
+blib_partition.h:57: warning: implicit declaration of function 'blib_partition_size'
+blib_partition.h: In function 'blib_partition_bicolor':
+blib_partition.h:159: warning: unused variable 'j'
+blib_partition.h: In function 'blib_partition_copy':
+blib_partition.h:248: warning: implicit declaration of function 'blib_partition_cell_count'
+blib_partition.h: In function 'blib_partition_swap_elts_unit':
+blib_partition.h:511: warning: unused variable 'i'
+In file included from blib_graph_auto.h:6,
+                 from blib_unit_test.h:8,
+                 from blib_unit_test.c:3:
+blib_graph.h: In function 'blib_graph_allocate':
+blib_graph.h:63: warning: unused variable 'j'
+In file included from blib_graph_auto.h:7,
+                 from blib_unit_test.h:8,
+                 from blib_unit_test.c:3:
+blib_cell_stack.h: In function 'blib_cell_stack_print':
+blib_cell_stack.h:15: warning: unused variable 'i'
+blib_cell_stack.h: In function 'blib_cell_stack_assert':
+blib_cell_stack.h:43: warning: too many arguments for format
+In file included from blib_unit_test.h:8,
+                 from blib_unit_test.c:3:
+blib_graph_auto.h: In function 'blib_graph_auto_edge_colored':
+blib_graph_auto.h:452: warning: unused variable 'edge_count'
+blib_graph_auto.h:452: warning: unused variable 'j'
+blib_graph_auto.h:452: warning: unused variable 'i'
+blib_graph_auto.h:451: warning: unused variable 'g2'
+blib_graph_auto.h: In function 'blib_graph_auto_unit':
+blib_graph_auto.h:482: warning: unused variable 'k'
+In file included from blib_unit_test.h:10,
+                 from blib_unit_test.c:3:
+blib_graph_transform.h: In function 'blib_graph_transform_edge_adorn':
+blib_graph_transform.h:9: warning: unused variable 'k'
+blib_graph_transform.h: In function 'blib_graph_transform_line_graph':
+blib_graph_transform.h:31: warning: unused variable 'k'
+blib_graph_transform.h: In function 'blib_graph_transform_unit':
+blib_graph_transform.h:77: warning: unused variable 'k'
+In file included from blib_unit_test.c:3:
+blib_unit_test.h: In function 'blib_unit_test':
+blib_unit_test.h:26: warning: unused variable 'fail'
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[0],cell_count(8):blib_graph_auto.h (339)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
 [3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
----------:blib_graph_auto.h (342)
-perm(16),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
 [3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(17),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(18),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
 [3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
----------:blib_graph_auto.h (342)
-perm(3),depth[1],cell_count(15):blib_graph_auto.h (339)
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
 [16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
-perm(1),depth[2],cell_count(20):blib_graph_auto.h (339)
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
 [16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
----------:blib_graph_auto.h (342)
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(3),depth[0],cell_count(8):blib_graph_auto.h (338)
+[3 16 ][1 2 17 18 ][0 19 ][5 6 13 14 ][9 10 ][8 11 ][4 15 ][7 12 ]
+perm(16),depth[1],cell_count(15):blib_graph_auto.h (338)
+[3 ][16 ][17 18 ][1 2 ][0 ][19 ][5 6 ][13 14 ][9 10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(17),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][17 ][18 ][1 ][2 ][0 ][19 ][6 ][5 ][14 ][13 ][9 ][10 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(18),depth[2],cell_count(20):blib_graph_auto.h (338)
+[3 ][16 ][18 ][17 ][2 ][1 ][0 ][19 ][5 ][6 ][13 ][14 ][10 ][9 ][8 ][11 ][15 ][4 ][12 ][7 ]
+perm(3),depth[1],cell_count(15):blib_graph_auto.h (338)
+[16 ][3 ][1 2 ][17 18 ][19 ][0 ][13 14 ][5 6 ][9 10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+perm(1),depth[2],cell_count(20):blib_graph_auto.h (338)
+[16 ][3 ][1 ][2 ][17 ][18 ][19 ][0 ][14 ][13 ][6 ][5 ][9 ][10 ][11 ][8 ][4 ][15 ][7 ][12 ]
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory
+./unit_test: line 4: ./a.out: No such file or directory
+./unit_test: line 6: ./a.out: No such file or directory

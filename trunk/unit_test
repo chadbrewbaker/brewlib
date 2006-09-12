@@ -1,6 +1,9 @@
 #!/bin/bash
-gcc blib_unit_test.c
-./a.out  >test.out 2>>test.err
-gcc blib_unit_test.c -O3
-./a.out >> test.out 2>> test.err
+rm a.out
+gcc blib_unit_test.c -g -Wall >test.out 2>test.out
+./a.out  >>test.out 2>>test.err
+gcc blib_unit_test.c -O3 >/dev/null 2>/dev/null
+./a.out >/dev/null 2>> test.err
+echo "---------"
+cat test.out
 

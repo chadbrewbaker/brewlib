@@ -6,7 +6,7 @@
 
 /*Insert a vertex on each of the edges. Verticies of the original graph will have the same index*/
 blib_graph* blib_graph_transform_edge_adorn(blib_graph* g){
-	int i,j,k,size,edges,edge_index;
+	int i,j,size,edges,edge_index;
 	blib_graph* eg;
 	size=blib_graph_size(g);
 	edges=blib_graph_edge_count(g);
@@ -26,27 +26,35 @@ blib_graph* blib_graph_transform_edge_adorn(blib_graph* g){
 }
 
 
-/* NOT PROPERLY CODED YET!!!*/
-/*Every edge gets turned into a vert and are adjacent if they shared a vertex in the orignal graph.*/
-blib_graph* blib_graph_transform_line_graph(blib_graph* g){
-	int i,j,k,size,edges,edge_index;
+/*Every edge gets turned into a vert and are adjacent if they shared a vertex in the original graph*/
+blib_graph* blib_graph_transform_line_graph(/*@readonly*/blib_graph* g){
+	int i,j,size,edges,edge_index;
 	blib_graph* lg;
-	blib_graph* eg;
+	int* pairs;
 	size=blib_graph_size(g);
 	edges=blib_graph_edge_count(g);
-	eg=blib_graph_transform_edge_adorn(g);
 	lg=blib_graph_allocate(edges);
-	/*Replace this with an iterator when we get around to it*/
+	pairs=BLIB_MALLOC(sizeof(int)*2*edges);
+
 	edge_index=0;
 	for(i=0;i<size;i++){
 		for(j=1;j<size;j++){
 			if(blib_graph_is_edge(g,i,j)){
-				blib_graph_set_edge(eg,i,size+edge_index,1);
-				blib_graph_set_edge(eg,j,size+edge_index,1);
+				pairs[2*edge_index]=i;
+				pairs[2*edge_index +1]=j;
 				edge_index++;
 			}
 		}
 	}
+	for(i=0;i<edges;i++){
+		for(j=i+1;j<edges;j++){
+			if(pairs[2*i]==pairs[2*j] || pairs[2*i]==pairs[2*j+1] || 
+			   pairs[2*i+1]==pairs[2*j] || pairs[2*i+1]==pairs[2*j+1]){
+				blib_graph_set_edge(lg,i,j,1);
+			}
+		}
+	}
+	free(pairs);
 	return lg;
 }
 
@@ -66,9 +74,10 @@ int blib_graph_transform_unit(void){
 		16, 14,16, 15,16, 20,17, 13,17, 18,17, 19,18, 13,18, 14,
 		18, 17,18, 20,19, 13,19, 15,19, 17,19, 20,20, 13,20, 14,
 		20, 15,20, 16,20, 18,20, 19,-1};
-	int i,j,k,index,size,fail;
+	int i,j,index,size,fail;
 	blib_graph* g;
 	blib_graph* eg;
+	blib_graph* lg;
 	fail=0;
 	g=blib_graph_allocate(20);
 	index=0;
@@ -118,6 +127,14 @@ int blib_graph_transform_unit(void){
 			}
 		}
 	}
+	lg=NULL;
+	lg=blib_graph_transform_line_graph(g);
+	if(lg==NULL){
+		BLIB_ERROR("Didn't allocate the line graph properly");
+		fail=1;
+	}
+	
+	blib_graph_free(lg);
 	blib_graph_free(g);
 	blib_graph_free(eg);
 	return fail;

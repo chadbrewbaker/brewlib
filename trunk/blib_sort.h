@@ -5,7 +5,7 @@
 
 void blib_sort_brute(int* vals,int* keys,int size, int is_ascending){
 	
-	int i,j,swap_key,swap_val,is_dirty,db1,db2,db3;
+	int i,j,swap_key,swap_val,is_dirty;
 	
 
 	
@@ -13,8 +13,6 @@ void blib_sort_brute(int* vals,int* keys,int size, int is_ascending){
 		for(i=0;i<size;i++){
 			is_dirty=0;
 			for(j=0;j<size-1;j++){
-				db1=keys[j];
-				db2=keys[j+1];
 				if(keys[j] > keys[j+1]){
 					swap_key=keys[j+1];
 					swap_val=vals[j+1];
@@ -56,7 +54,7 @@ void blib_sort_brute(int* vals,int* keys,int size, int is_ascending){
 }
 
 void blib_sort_assert(int* keys, int size, int is_ascending){
-	int i,j;
+	int i;
 	if(is_ascending){
 		for(i=0;i<size-1;i++){
 			if(keys[i] > keys[i+1])

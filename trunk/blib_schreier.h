@@ -5,11 +5,11 @@ typedef struct blib_schreier_t{
 	int size;
 	/*In case we want to change the base permutation to something other than the identity*/
 	int* base;
-	/*The number of perms at each level*/
-	int *fixed_sizes;
+	int* new_base;
 	/* The schreier representation. */
 	/*Actually we can save have the space because the first n cords of the nth permutation are fixed*/
 	int *** perms;
+	int *** new_perms;
 	/*No clue if these are needed in the schrier rep. But might be cool if they are*/
 	/*For this is there a faster way than backtrack to generate it?*/
 	int perm_count;
@@ -26,30 +26,38 @@ typedef struct blib_schreier_t{
 
 
 blib_schreier*  blib_schreier_alloc( int size){
-	int i,j,k;
+	int i,j;
 	blib_schreier* g;
 	g=BLIB_MALLOC(sizeof(blib_schreier));
 	g->size=size;
 	g->perms=(int***)BLIB_MALLOC(sizeof(int**)*size);
+	g->new_perms=(int***)BLIB_MALLOC(sizeof(int**)*size);
 	for(i=0;i<size;i++){
 		g->perms[i]=(int**)BLIB_MALLOC(sizeof(int*)*size);
+		g->new_perms[i]=(int**)BLIB_MALLOC(sizeof(int*)*size);
 		for(j=0;j<size;j++){
 			g->perms[i][j]=(int*)BLIB_MALLOC(sizeof(int)*size);
-			for(k=0;k<size;k++)
-					g->perms[i][j][k]=-1;
+			g->new_perms[i][j]=(int*)BLIB_MALLOC(sizeof(int)*size);
+			g->perms[i][j][0]=-1;
+			g->new_perms[i][j][0]=-1;
 			/*Start out with no permutations*/
 		}
 		/*Give each level the identity permutation*/
 		for(j=0;j<size;j++){
 			g->perms[i][0][j]=j;
+			g->new_perms[i][0][j]=j;
 		}
-		g->fixed_sizes[i]=1;
 	}
 	g->perm_count=1;
 	g->forb_count=0;
-	g->temp=BLIB_MALLOC(sizeof(int)*size);
-	g->temp2=BLIB_MALLOC(sizeof(int)*size);
-	g->temp3=BLIB_MALLOC(sizeof(int)*size);
+	g->base=(int*)BLIB_MALLOC(sizeof(int)*size);
+	for(i=0;i<size;i++){
+		g->base[i]=i;
+	}
+	g->new_base=(int*)BLIB_MALLOC(sizeof(int)*size);
+	g->temp=(int*)BLIB_MALLOC(sizeof(int)*size);
+	g->temp2=(int*)BLIB_MALLOC(sizeof(int)*size);
+	g->temp3=(int*)BLIB_MALLOC(sizeof(int)*size);
 	g->temps_allocated=0;
 	g->temps_used=0;
 	return g;
@@ -99,28 +107,7 @@ void blib_schreier_mult(blib_schreier* g, int* p1, int* p2, int* result){
 	}
 }
 
-int blib_schreier_test(blib_schreier* g, int* perm){
-	int i,j,k,found;
-	for(i=0;i<blib_schreier_size(g);i++){
-		g->temp[i]=perm[i];
-	}
-	for(i=0;i<blib_schreier_size(g);i++){
-		found=0;
-		for(j=0;j<blib_schreier_size(g);j++){
-			if(g->perms[i][j][i]==g->temp[i]){
-				blib_schreier_inverse(g,g->perms[i][j],g->temp2);
-				blib_schreier_mult(g,g->temp2,g->temp,g->temp3);
-				for(k=0;k<blib_schreier_size(g);k++)
-					g->temp[k]=g->temp3[k];
-				found=1;
-				break;
-			}
-		}
-		if(!found)
-			return i;
-	}
-	return blib_schreier_size(g);
-}
+
 
 int blib_schreier_get_temp(blib_schreier* g){
 	int i,index;
@@ -173,73 +160,122 @@ void blib_schreier_free_temp(blib_schreier*g, int index){
 }
 
 
+
+
+int blib_schreier_test(blib_schreier* g, int* perm){
+	int i,j,k,found;
+	for(i=0;i<blib_schreier_size(g);i++){
+		g->temp[i]=perm[i];
+	}
+	for(i=0;i<blib_schreier_size(g);i++){
+		found=0;
+		for(j=0;j<blib_schreier_size(g);j++){
+			if(g->perms[i][j][i]==g->temp[i]){
+				blib_schreier_inverse(g,g->perms[i][j],g->temp2);
+				blib_schreier_mult(g,g->temp2,g->temp,g->temp3);
+				for(k=0;k<blib_schreier_size(g);k++)
+					g->temp[k]=g->temp3[k];
+				found=1;
+				break;
+			}
+		}
+		if(!found)
+			return i;
+	}
+	return blib_schreier_size(g);
+}
+
+int blib_schreier_test2(blib_schreier* g, int* perm, int is_temp){
+	int i,j,x,y,found;
+	for(i=0;i<blib_schreier_size(g);i++){
+		if(!is_temp)
+			x=perm[g->base[i]];
+		else
+			x=perm[g->new_base[i]];
+		for(j=0;j<blib_schreier_size(g);j++){
+			if(!is_temp)
+				y=g->perms[i][j][g->base[i]];
+			else
+				y=g->new_perms[i][j][g->new_base[i]];
+			if(y==x)
+			{
+				if(!is_temp)
+					blib_schreier_inverse(g,g->perms[i][j],g->temp2);
+				else
+					blib_schreier_inverse(g,g->new_perms[i][j],g->temp2);
+				blib_schreier_mult(g,g->temp2,perm,g->temp3);
+				for(j=0;j<blib_schreier_size(g);j++){
+					perm[j]=g->temp3[j];
+				}
+				found=1;
+				break;
+			}
+		}
+		if(!found)
+			return i;
+	}
+	return blib_schreier_size(g);
+}
+
+
 int blib_schreier_enter(blib_schreier* g, int* new_perm)
 {
 	int i,j;
 	int tmp;
 	i=blib_schreier_test(g,new_perm);
-	if(i!=blib_schreier_size(g)){
-		for(j=i;j<blib_schreier_size(g);j++){
-			tmp=blib_schreier_get_temp(g);
-			blib_schreier_mult(g,g->perms[i][j],new_perm,blib_schreier_temp(g,tmp));
-			blib_schreier_enter(g, blib_schreier_temp(g,tmp));
-			blib_schreier_free_temp(g,tmp);
-		}
-		return 1;
+	if(i==blib_schreier_size(g)){
+		return 0;
 	}
-	return 0;
+	for(j=i;j<blib_schreier_size(g);j++){
+		if(g->perms[i][j][0]<0)
+			continue;
+		tmp=blib_schreier_get_temp(g);
+		blib_schreier_mult(g,g->perms[i][j],new_perm,blib_schreier_temp(g,tmp));
+		blib_schreier_enter(g, blib_schreier_temp(g,tmp));
+		blib_schreier_free_temp(g,tmp);
+	}
+	return 1;
 }
 
-
-void blib_schreier_test2(blib_schreier* g, int* base, int* perm){
-#ifdef I_AM_TOO_LAZY_TO_COMMENT_THIS_OUT
-	int i,j,x;
-	for(i=0;i<blib_schreier_size(g);i++){
-		x=perm[base[i]];
-		if(1/*there is an h in g.U[i] such that h[base[i]]==x*/)
-		{
-			blib_schreier_inverse(g,h,g->temp);
-			blib_schreier_mult(g,g->temp,perm,g->temp2);
-			for(j=0;j<blib_schreier_size(g);j++){
-				perm[j]=g->temp2[j];
-			}
-		}
-		else
-			return i;
-	}
-	return blib_schreier_size(g);
-#endif
-}
-
-void blib_schreier_enter2(blib_schreier* g,int* perm){
-#ifdef BLAHBLAH
-	int i,j;
-	i=blib_schreier_test2(g,perm);
+int blib_schreier_enter2(blib_schreier* g,int* new_perm,int is_temp){
+	int i,j,k;
+	int tmp;
+	i=blib_schreier_test2(g,new_perm,is_temp);
 	if(i== blib_schreier_size(g)){
-		return;
-	}
-	else{
-		/*Append perm to U[i]*/
+		return 0;
 	}
 	for(j=0;j<=i;j++){
-		/* Take every permutation in U[j], multiply it with g, then enter it in g under the base*/
-		
+		for(k=0;k<blib_schreier_size(g);k++){
+			if(g->perms[i][j][0]<0)
+				continue;
+			tmp=blib_schreier_get_temp(g);
+			blib_schreier_mult(g,new_perm,g->perms[i][j],blib_schreier_temp(g,tmp));
+			blib_schreier_enter2(g, blib_schreier_temp(g,tmp),is_temp);
+			blib_schreier_free_temp(g,tmp);
+		}
 	}
-#endif
-
+	return 1;
 }
 
 void blib_schreier_change_base(blib_schreier* g, int* new_base){
-	int i;
+	int i,j;
 	for(i=0;i<blib_schreier_size(g);i++){
-		/*set U'[i] to the identity perm*/
+		for(j=0;j<blib_schreier_size(g);j++){
+			g->new_perms[i][0][j]=j;
+		}
+		g->new_base[i]=i;
 	}
+
 	/*Store U' as a new group H*/
 	for(i=0;i<blib_schreier_size(g);i++){
-		/*Enter every permutation from our oringinal group into the empty group h using the new base*/
-		/*i.e. copy the dang thing???*/
+		for(j=0;j<blib_schreier_size(g);j++){
+			blib_schreier_enter2(g,g->perms[i][j],1);
+		}
 	}
 }
+
+
+
 
 /*
 void blib_schreier_print(blib_schreier* g, FILE* dest){

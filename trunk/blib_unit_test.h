@@ -8,7 +8,7 @@
 #include "blib_graph_auto.h"
 #include "blib_graph.h"
 #include "blib_graph_transform.h"
-
+#include "blib_schreier.h"
 int BLIB_UNIT_PASS_COUNT,BLIB_UNIT_FAIL_COUNT;
 
 void blib_unit_report(int i,char* test_name){
@@ -29,6 +29,7 @@ void blib_unit_test(void){
 	blib_unit_report(blib_graph_unit(),"graph");
 	blib_unit_report(blib_graph_auto_unit(),"graph_auto");
 	blib_unit_report(blib_graph_transform_unit(),"graph_transform");
+	blib_unit_report(blib_schreier_unit(),"schreier");
 	printf("Passed %d, Failed %d\n",BLIB_UNIT_PASS_COUNT,BLIB_UNIT_FAIL_COUNT);
 }
 

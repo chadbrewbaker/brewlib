@@ -1,6 +1,12 @@
+In file included from blib_graph_auto.h:8,
+                 from blib_unit_test.h:8,
+                 from blib_unit_test.c:3:
+blib_schreier.h: In function 'blib_schreier_group_unit':
+blib_schreier.h:390: warning: unused variable 'i'
 Starting Unit tests
 Passed partition
 Passed graph
 Passed graph_auto
 Passed graph_transform
-Passed 4, Failed 0
+Passed schreier
+Passed 5, Failed 0

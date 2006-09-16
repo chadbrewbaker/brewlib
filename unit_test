@@ -1,5 +1,6 @@
 #!/bin/bash
 rm a.out
+rm test.err
 gcc blib_unit_test.c -g -Wall >test.out 2>test.out
 ./a.out  >>test.out 2>>test.err
 gcc blib_unit_test.c -O3 >/dev/null 2>/dev/null

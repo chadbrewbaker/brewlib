@@ -1,15 +1,15 @@
 #ifndef _BLIB_SCHREIER_DEF_
 #define _BLIB_SCHREIER_DEF_
 #include "blib_error.h"
+
+
 typedef struct blib_schreier_t{
 	int size;
 	/*In case we want to change the base permutation to something other than the identity*/
 	int* base;
-	int* new_base;
 	/* The schreier representation. */
 	/*Actually we can save have the space because the first n cords of the nth permutation are fixed*/
 	int*** perms;
-	int*** new_perms;
 	/*Hmm. Question if we take Sn and take out all elements of G except the identity do we get a group back, and if so is this anti-group helpfull?*/
 	int forb_count;
 	int* temp;
@@ -19,6 +19,7 @@ typedef struct blib_schreier_t{
 	int* temp_stack_used;
 	int temps_allocated;
 	int temps_used;
+	struct blib_schreier_t* temp_schreier;
 	}blib_schreier;
 
 
@@ -33,12 +34,10 @@ void blib_schreier_reset(blib_schreier* g){
 			if(i==j){
 				for(k=0;k<size;k++){
 					g->perms[i][j][k]=k;
-					g->new_perms[i][j][k]=k;
 				}
 				continue;
 			}
 			g->perms[i][j][0]=-1;
-			g->new_perms[i][j][0]=-1;
 		}
 	}
 	g->forb_count=0;
@@ -58,25 +57,21 @@ blib_schreier*  blib_schreier_alloc( int size){
 	g=BLIB_MALLOC(sizeof(blib_schreier));
 	g->size=size;
 	g->perms=(int***)BLIB_MALLOC(sizeof(int**)*size);
-	g->new_perms=(int***)BLIB_MALLOC(sizeof(int**)*size);
 	
 	for(i=0;i<size;i++){
 		g->perms[i]=(int**)BLIB_MALLOC(sizeof(int*)*size);
-		g->new_perms[i]=(int**)BLIB_MALLOC(sizeof(int*)*size);
 		for(j=0;j<size;j++){
 			g->perms[i][j]=(int*)BLIB_MALLOC(sizeof(int)*size);
-			g->new_perms[i][j]=(int*)BLIB_MALLOC(sizeof(int)*size);
 		}
 	}
 	g->base=(int*)BLIB_MALLOC(sizeof(int)*size);
-	g->new_base=(int*)BLIB_MALLOC(sizeof(int)*size);
 	g->temp=(int*)BLIB_MALLOC(sizeof(int)*size);
 	g->temp2=(int*)BLIB_MALLOC(sizeof(int)*size);
 	g->temp3=(int*)BLIB_MALLOC(sizeof(int)*size);
+	g->temp_schreier=NULL;
 	blib_schreier_reset(g);
 	return g;
 }
-
 
 
 
@@ -109,10 +104,8 @@ void blib_schreier_free(blib_schreier* g){
 	for(i=0;i<g->size;i++){
 		for(j=0;j<g->size;j++){
 			free(g->perms[i][j]);
-			free(g->new_perms[i][j]);
 		}
 		free(g->perms[i]);
-		free(g->new_perms[i]);
 	}
 	for(i=0;i<g->temps_allocated;i++)
 		free(g->temp_stack[i]);
@@ -121,22 +114,26 @@ void blib_schreier_free(blib_schreier* g){
 	if(g->temp_stack_used)
 		free(g->temp_stack_used);
 	free(g->perms);
-	free(g->new_perms);
 	free(g->temp);
 	free(g->temp2);
 	free(g->temp3);
+	if(g->temp_schreier!=NULL)
+		blib_schreier_free(g->temp_schreier);
 	free(g);
 }
 
 
 /*Pray this doesn't overflow :)*/
 int blib_schreier_order(blib_schreier* g){
-	int i,j,prod,sum;
+	int i,j,size,prod,sum;
 	prod=1;
-	for(i=0;i<blib_schreier_size(g);i++){
-		sum=0;
-		for(j=0;j<blib_schreier_size(g);j++){
-			if(g->perms[i][j]>=0)
+	size=blib_schreier_size(g);
+	for(i=0;i<size;i++){
+		sum=1;
+		for(j=0;j<size;j++){
+			if(i==j)
+				continue;
+			if(g->perms[i][j][0]>=0)
 				sum++;
 		}
 		prod*=sum;
@@ -152,6 +149,13 @@ void blib_shchreier_forbid_perm(blib_schreier* g, int src, int dest){}
 
 void blib_schreier_inverse(blib_schreier* g, int* perm, int* result){
 	int i;
+	if(perm[0]<0){
+		fprintf(stderr,"Entering schreier_inverse\n");
+		for(i=0;i<blib_schreier_size(g);i++)
+			fprintf(stderr,"%d ",perm[i]);
+		fprintf(stderr,"\n");
+		BLIB_ERROR(" ");
+	}
 	for(i=0;i<blib_schreier_size(g);i++){
 		result[perm[i]]=i;
 	}
@@ -199,8 +203,9 @@ int blib_schreier_get_temp(blib_schreier* g){
 				break;
 			}
 		}
-		if(index<0)
+		if(index<0){
 			BLIB_ERROR("DANGER DANGER");
+		}
 	}
 	
 	g->temps_used++;
@@ -219,8 +224,9 @@ void blib_schreier_free_temp(blib_schreier*g, int index){
 	else{
 		g->temp_stack_used[index]=0;
 		g->temps_used--;
-		if(g->temps_used<0)
+		if(g->temps_used<0){
 			BLIB_ERROR("TEMP ALLOC PROBLEM");
+		}
 	}
 }
 
@@ -260,35 +266,18 @@ int blib_schreier_test(blib_schreier* g, int* perm){
 	return blib_schreier_size(g);
 }
 
-int blib_schreier_test2(blib_schreier* g, int* perm, int is_temp){
-	int i,j,x,y,found;
-	BLIB_ERROR("Test %d",TEST_COUNT++);
+int blib_schreier_test2(blib_schreier* g, int* perm){
+	int i,j,k,found;
 	for(i=0;i<blib_schreier_size(g);i++){
-		if(!is_temp)
-			x=perm[g->base[i]];
-		else
-			x=perm[g->new_base[i]];
-		for(j=0;j<blib_schreier_size(g);j++){
-			if(!is_temp)
-				y=g->perms[i][j][g->base[i]];
-			else
-				y=g->new_perms[i][j][g->new_base[i]];
-			if(y==x)
-			{
-				if(!is_temp)
-					blib_schreier_inverse(g,g->perms[i][j],g->temp2);
-				else
-					blib_schreier_inverse(g,g->new_perms[i][j],g->temp2);
-				blib_schreier_mult(g,g->temp2,perm,g->temp3);
-				for(j=0;j<blib_schreier_size(g);j++){
-					perm[j]=g->temp3[j];
-				}
-				found=1;
-				break;
-			}
+		if(g->perms[i][g->base[perm[i]]][0]>=0){
+			blib_schreier_inverse(g,g->perms[i][g->base[perm[i]]],g->temp2);
+			blib_schreier_mult(g,g->temp2,perm,g->temp3);
+			for(k=0;k<blib_schreier_size(g);k++)
+				perm[k]=g->temp3[k];
 		}
-		if(!found)
+		else{
 			return i;
+		}
 	}
 	return blib_schreier_size(g);
 }
@@ -303,7 +292,7 @@ int blib_schreier_enter(blib_schreier* g, int* new_perm)
 	print_perm(new_perm,blib_schreier_size(g));
 	/*BLIB_ERROR(" On group:");
 	blib_schreier_print(g,stderr);*/
-	i=blib_schreier_test(g,new_perm);
+	i=blib_schreier_test2(g,new_perm);
 	BLIB_ERROR("Depth %d Test gave me back %d/%d",ENTER_DEPTH,i,blib_schreier_size(g));
 
 	if(i==blib_schreier_size(g)){
@@ -350,41 +339,57 @@ int blib_schreier_enter(blib_schreier* g, int* new_perm)
 	return 1;
 }
 
-int blib_schreier_enter2(blib_schreier* g,int* new_perm,int is_temp){
+int blib_schreier_enter2(blib_schreier* g,int* new_perm){	
 	int i,j,k;
 	int tmp;
-	i=blib_schreier_test2(g,new_perm,is_temp);
-	if(i== blib_schreier_size(g)){
+	i=blib_schreier_test2(g,new_perm);
+	if(i==blib_schreier_size(g)){
 		return 0;
 	}
+	/*Insert the permutation into Ui*/
+	/*Do we need to re-base the last coords??? */
+	for(j=0;j<blib_schreier_size(g);j++)
+		g->perms[i][g->base[new_perm[i]]][j]=new_perm[j];
 	tmp=blib_schreier_get_temp(g);
 	for(j=0;j<=i;j++){
 		for(k=0;k<blib_schreier_size(g);k++){
-			if(g->perms[j][k][0]<0)
+			if(g->perms[j][k][0]<0){
 				continue;
+			}
 			blib_schreier_mult(g,new_perm,g->perms[j][k],blib_schreier_temp(g,tmp));
-			blib_schreier_enter2(g, blib_schreier_temp(g,tmp),is_temp);
+			blib_schreier_enter2(g, blib_schreier_temp(g,tmp));
 		}
 	}
 	blib_schreier_free_temp(g,tmp);
 	return 1;
 }
 
-void blib_schreier_change_base(blib_schreier* g, int* new_base){
-	int i,j;
-	for(i=0;i<blib_schreier_size(g);i++){
-		for(j=0;j<blib_schreier_size(g);j++){
-			g->new_perms[i][0][j]=j;
-		}
-		g->new_base[i]=i;
-	}
 
-	/*Store U' as a new group H*/
-	for(i=0;i<blib_schreier_size(g);i++){
-		for(j=0;j<blib_schreier_size(g);j++){
-			blib_schreier_enter2(g,g->perms[i][j],1);
+blib_schreier* blib_schreier_change_base(blib_schreier* g, int* new_base){
+	int i,j,k,size;
+	blib_schreier* g_swap;
+	size=blib_schreier_size(g);
+	if(g->temp_schreier==NULL)
+		g->temp_schreier=blib_schreier_alloc(size);
+	blib_schreier_reset(g->temp_schreier);
+	for(i=0;i<size;i++){
+		g->temp_schreier->base[i]=new_base[i];
+	}
+	
+	/*Copy U to a new group H*/
+	for(i=0;i<size;i++){
+		for(j=0;j<size;j++){
+			/*Can we skip the identity element of each row???*/
+			if(g->perms[i][j][0]>=0 ){
+				blib_schreier_enter2(g->temp_schreier,g->perms[i][j]);
+			}
 		}
 	}
+	/*Switcharoo the pointers so we don't have to copy anything*/
+	g_swap=g->temp_schreier;
+	g_swap->temp_schreier=g;
+	g->temp_schreier=NULL;
+	return g_swap;
 }
 
 
@@ -416,6 +421,7 @@ int blib_schreier_mem_unit(){
 	BLIB_ERROR("About to print");
 	blib_schreier_print(g,stderr);
 	BLIB_ERROR("Printed");
+
 	blib_schreier_free(g);
 
 	
@@ -425,7 +431,7 @@ int blib_schreier_mem_unit(){
 /*Allocate a few groups to make sure the non-base part is working. Also check persistant*/
 int blib_schreier_group_unit(){
 	blib_schreier* g;
-	int i;
+	int i,x;
 
 	int tmp[8];
 	/*(0,1,3,7,6,4)(2,5)*/
@@ -449,42 +455,41 @@ int blib_schreier_group_unit(){
 	
 	
 	g=blib_schreier_alloc(8);
-	blib_schreier_enter(g,bpa);
+	blib_schreier_enter2(g,bpa);
 	BLIB_ERROR("*.......Done putting in first perm.........*.");
-	blib_schreier_enter(g,bpb);
+	blib_schreier_enter2(g,bpb);
 	BLIB_ERROR("printing");
 	blib_schreier_print(g,stderr);
 
 	blib_schreier_free(g);
 	
 
-	return 0;
-	
+		
 	g=blib_schreier_alloc(5);
 	BLIB_ERROR("Entering the first permutation of A5");
-	blib_schreier_enter(g,permb);
+	blib_schreier_enter2(g,permb);
 	BLIB_ERROR("printing");
 	blib_schreier_print(g,stderr);
-	if(blib_schreier_order(g)!=3){
-		BLIB_ERROR("Wrong order:%d",blib_schreier_order(g));
+	x=blib_schreier_order(g);
+	if(x!=3){
+		BLIB_ERROR("Wrong order:%d in group of base size %d",x,blib_schreier_size(g));
 		return 1;
 	}
-	blib_schreier_enter(g,perma);
+	blib_schreier_enter2(g,perma);
 	BLIB_ERROR("printing");
 	blib_schreier_print(g,stderr);
-	if(blib_schreier_order(g)!=60){
-		BLIB_ERROR("Wrong Order %d",blib_schreier_order(g));
+	x=blib_schreier_order(g);
+	if(x!=60){
+		BLIB_ERROR("Wrong Order %d in group of base size %d",x,blib_schreier_size(g));
 		return 1;
+	}
+	
+	for(i=0;i<10;i++){
+		g=blib_schreier_change_base(g,permb);
+		g=blib_schreier_change_base(g,perma);
 	}
 	blib_schreier_free(g);
 	return 0;	
-}
-/*Allocate a few groups with base changing. Also check persistance.*/
-int blib_schreier_group_base_unit(){
-/*	blib_schreier* g;
-	int i;
-*/	
-	return 0;
 }
 
 int blib_schreier_unit(){
@@ -492,8 +497,6 @@ int blib_schreier_unit(){
 	blib_schreier_mem_unit();
 	BLIB_ERROR("Done with mem unit");*/
 	if(blib_schreier_group_unit())
-		return 1;
-	if(blib_schreier_group_base_unit())
 		return 1;
 	return 0;
 }

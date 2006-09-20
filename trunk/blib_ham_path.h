@@ -12,7 +12,7 @@ void blib_ham_path_hello_world(int* arr,int size,int* orbits){
 	int i;
 	COUNTER++;
 	/*if(COUNTER%1000 == 0){*/
-		printf("Howdy(");
+		printf("Howdy#%d(",COUNTER);
 		for(i=0;i<size;i++){
 			printf("%d->",arr[i]);
 		}
@@ -159,10 +159,12 @@ void blib_ham_path_sub(blib_graph* g,blib_graph* eg,void(*path_func)(int*,int,in
 			blib_partition_print(pre_part,stderr);
 			BLIB_ERROR("Calling Auto");
 			out_file=fopen("larry.gr","w");
-			BLIB_ERROR("is it null(%d)",out_file==NULL);
-			blib_graph_print_dreadnaut(eg,out_file);
+			
+			blib_graph_print(eg,out_file);
+			blib_partition_print(pre_part,stderr);
+			/*blib_graph_print_dreadnaut(eg,out_file);
 			blib_partition_print_dreadnaut(pre_part,out_file);
-			fprintf(out_file,"x\no\n");
+			fprintf(out_file,"x\no\n");*/
 			BLIB_ERROR(" ");
 			fclose(out_file);
 			blib_graph_auto_persistent(eg,orbits,NULL,NULL,pre_part,egstuff);

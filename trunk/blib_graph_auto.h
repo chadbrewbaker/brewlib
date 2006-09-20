@@ -274,23 +274,27 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 	int i,j,a,b,min,size;
 	/*blib_partition_print(stuff->part_stack[depth],stderr);*/
 	/*blib_error_tabs(depth);BLIB_ERROR(" <-recording%d,%d",depth,result);*/
+	size=blib_graph_size(stuff->graph);
+	
 	/*Found an automorph so record it*/
 	if(result==0){
 		if(stuff->schreier!=NULL){
-			/* Fill this in when coded
-			blib_schreier_print(stuff->schreier,stderr);
-			blib_partition_get_perm(stuff->part_stack[depth],stuff->scratch_arr);
-			blib_schreier_add_perm(stuff->schreier,stuff->scratch_arr);
-			if(blib_schreier_is_full(stuff->schreier))
-				return 1;
-			 */
+			BLIB_ERROR("Orbit found");
+			for(i=0;i<size;i++){
+				stuff->scratch_arr[i]=blib_partition_nth_item(stuff->part_stack[depth],i);
+			}
+			blib_schreier_enter2(stuff->schreier,stuff->scratch_arr);
+			/* Implement it so that it automaticaly quits when the symetric group is generated, or we have enough 
+				forbiden permutations so that we can add no more:
+				if(blib_schreier_is_full(stuff->schreier))
+				return 1;*/
 		}
-		size=blib_graph_size(stuff->graph);
+		
 		/*fprintf(stderr,"orbits before<");
 		for(i=0;i<size;i++)
-			fprintf(stderr,"%d ",stuff->orbits[i]);
+		fprintf(stderr,"%d ",stuff->orbits[i]);
 		fprintf(stderr,">\n");*/
-			
+		
 		for(i=0;i<size;i++){
 			a=blib_partition_nth_item(stuff->part_stack[depth],i);
 			b=blib_partition_nth_item(stuff->best_part,i);
@@ -308,20 +312,27 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 			}
 		}
 		/*
-		if(stuff->schreier!=NULL)
-			blib_schreier_print(stuff->schreier,stderr);
+		 if(stuff->schreier!=NULL)
+		 blib_schreier_print(stuff->schreier,stderr);
 		 */
 		/*fprintf(stderr,"orbits after<");
 		for(i=0;i<size;i++)
-			fprintf(stderr,"%d ",stuff->orbits[i]);
+		fprintf(stderr,"%d ",stuff->orbits[i]);
 		fprintf(stderr,">\n");*/
 		
 	}
 	/*Record it as the new best permutation*/
 	else{
+		BLIB_ERROR("Better found");
 		stuff->best_part_defined=1;
 		stuff->best_part=blib_partition_copy(stuff->part_stack[depth],stuff->best_part);
 	}
+	fprintf(stderr,"[");
+	for(i=0;i<size;i++){
+		fprintf(stderr,",%d ",blib_partition_nth_item(stuff->part_stack[depth],i));
+	}
+	fprintf(stderr,"]\n");
+	BLIB_ERROR(" ");
 	return 0;
 }
 
@@ -329,20 +340,13 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 /* Returns  1 if better found, 0 automorphism, -1 worse  */
 int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 {
-	int i,cells,result,split_size,split_cell,min_cells,best_flag;
+	int i,j,k,cells,result,split_size,split_cell,min_cells,best_flag;
+	int split_vert;
 	int d_size;
-	/*Assume it is already part_refined  at [depth], so we can write new copies to [depth+1] */
-	/*blib_error_tabs(depth);fprintf(stderr,"auto_sub(%d)",depth);*/
-	/*blib_error_tabs(depth);blib_partition_print(stuff->part_stack[depth],stderr);*/
 	if(!stuff->best_part_defined)
 		best_flag=1;
 	else
 		best_flag=0;
-	/*
-	if(depth<119){
-	BLIB_ERROR("perm(%d),depth[%d],cell_count(%d)",  (stuff->part_stack[depth])->perm[depth],depth,stuff->part_stack[depth]->cell_count);
-	blib_partition_print(stuff->part_stack[depth],stderr);
-	}*/
 	
 	cells=blib_partition_cell_count(stuff->part_stack[depth]);
 #ifdef BLIB_DEBUG
@@ -361,16 +365,13 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 		BLIB_ERROR(" ");	
 	}
 #endif
-	
 	result=blib_graph_auto_part_test(stuff,depth);
-	/*blib_error_tabs(depth);BLIB_ERROR("result was %d",result);*/
-	/*Worse off so backtrack*/
 	if(result < 0){
+		/*Worse off so backtrack*/
 		blib_error_tabs(depth);BLIB_ERROR("Returning %d",result);
 		return result;
 	}
 	/*If we have unit partitions record it*/
-	
 	if(cells == blib_graph_size(stuff->graph)){
 		blib_graph_auto_record(stuff,depth,result);
 		/*blib_error_tabs(depth);BLIB_ERROR("recording and returning %d",result);*/
@@ -402,7 +403,7 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 	/*blib_error_tabs(depth);BLIB_ERROR("split_cell_size %d",split_size);*/
 	for(i=0;i<split_size;i++){
 		/*Ignore if it didn't meet the greedy test*/
-		if(stuff->child_cells[depth][i]>min_cells)
+		if(stuff->child_cells[depth][i]>min_cells  || stuff->child_cells[depth][i]<0)
 			continue;
 		stuff->part_stack[depth+1]=blib_partition_copy(stuff->part_stack[depth],stuff->part_stack[depth+1]);
 		blib_partition_fix_element(stuff->part_stack[depth+1], split_cell, i); 
@@ -411,19 +412,41 @@ int blib_graph_auto_sub(blib_graph_auto_storage* stuff, int depth)
 		result=blib_graph_auto_sub(stuff,depth+1);
 		if(result>0)
 			best_flag=1;
-		if(result == 0){ /*We got an automorph, so backtrack up to the parent of the best found partition*/
+		/*We got an automorph, so backtrack up to the parent of the best found partition*/
+		if(result == 0){
 			if(!best_flag){
-				/*blib_error_tabs(depth);BLIB_ERROR("returning 0");*/
 				return 0;
 			}
 		}
+		/*Kill off isomorphic children */
+		/*Re-base base on our perm. Is there a quicker way of doing this??? It would also be nice to skip this step when we have no auts*/
+		for(j=0;j<blib_graph_size(stuff->graph);j++){
+			stuff->scratch_arr[j]=blib_partition_nth_item(stuff->part_stack[depth+1],j);
+		}
+		if(stuff->schreier==NULL)
+			stuff->schreier=blib_schreier_alloc(blib_graph_size(stuff->graph));
+		blib_schreier_change_base(stuff->schreier,stuff->scratch_arr);
+		/*The index we are splitting on is split_cell*/
+		/*The element we are splitting on is located at ...blib_partition_nth_item(stuff->part_stack[depth],split_cell+i)*/
+		
+		split_vert=blib_partition_nth_item(stuff->part_stack[depth],split_cell+i);
+		for(j=0;j<blib_graph_size(stuff->graph);j++){
+			if(stuff->schreier->perms[split_cell][j][0]>=0){
+				for(k=i+1;k<split_size;k++){
+					if(stuff->schreier->perms[split_cell][j][split_vert]== 
+					   blib_partition_nth_item(stuff->part_stack[depth],split_cell+k)      ){						
+						stuff->child_cells[depth][k]=-1;
+					}
+				}
+			}
+		}
 	}
-if(best_flag){
-	/*blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning 1",depth);*/
-	return 1;
-}
-/*blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning -1",depth);*/
-return -1;
+	if(best_flag){
+		/*blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning 1",depth);*/
+		return 1;
+	}
+	/*blib_error_tabs(depth);BLIB_ERROR("blib_graph_auto_sub(%d) returning -1",depth);*/
+	return -1;
 }
 
 /*

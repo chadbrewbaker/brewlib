@@ -11,22 +11,35 @@ What is the minimum number of permutations that need to be tested in a black-box
 #include "blib_graph.h"
 #include "blib_error.h"
 
-#define SET_SIZE 6
+#define SET_SIZE 5
 
 
 /*Modification of CAGES page53*/
 /*Make sure perm and scratch have are padded with en extra element on the end*/
-void perm_lex_successor(int size, int* perm, int* scratch){
+int perm_lex_successor(int size, int* perm, int* scratch){
 	int i,j,t,h;
-	/*shift right and re-base to 1*/
-	for(i=0;i<size;i++){
-		perm[i+1]=perm[i]+1;
+	printf("got(");
+	for(i=0;i<size;i++)
+		printf("%d ",perm[i]);
+	printf(")\n");
+	
+	/*shift right and re-base to 1*/	
+	for(i=size;i>=1;i--){
+		perm[i]=perm[i-1]+1;
 	}
 	perm[0]=0;
 	i=size-1;
 	/*Find the first increasing pair*/
 	while(perm[i]>perm[i+1])
 		i--;
+	if(i==0){
+		/*shift left and re-base to 0*/
+		for(i=0;i<size;i++){
+			perm[i]=perm[i+1]-1;
+		}		
+		return 1;
+	}
+	
 	j=size;
 	/*Find the first element from the end of the array that is bigger or same*/
 	while(perm[j]<perm[i])
@@ -34,6 +47,7 @@ void perm_lex_successor(int size, int* perm, int* scratch){
 	t=perm[j];
 	perm[j]=perm[i];
 	perm[i]=t;
+	printf("i=%d  j=%d \n",i,j);
 	for(h=i+1;h<=size;h++){
 		scratch[h]=perm[h];
 	}
@@ -44,6 +58,11 @@ void perm_lex_successor(int size, int* perm, int* scratch){
 	for(i=0;i<size;i++){
 		perm[i]=perm[i+1]-1;
 	}
+	printf("Ending(");
+	for(i=0;i<size;i++)
+		printf("%d ",perm[i]);
+	printf(")\n\n");
+	return 0;
 }
 
 void perm_copy(int size,int* source, int* dest){
@@ -63,8 +82,8 @@ int factorial(int x){
 int perm_lex_rank(int size,int* perm,int* scrap){
 	int i,j,r;
 	/*rebase and shift*/
-	for(i=0;i<size;i++){
-		perm[i+1]=perm[i]+1;
+	for(i=size;i>=1;i--){
+		perm[i]=perm[i-1]+1;
 	}
 	r=0;
 	perm_copy(size+1,perm,scrap);
@@ -190,6 +209,8 @@ int main(){
 	for(i=0;i<group_size;i++){
 		perm_table[i]=(int*)malloc(sizeof(int)*(SET_SIZE+1));
 	}
+	
+	
 	perm1=(int*)malloc(sizeof(int)*(SET_SIZE+1));
 	perm2=(int*)malloc(sizeof(int)*(SET_SIZE+1));
 	perm3=(int*)malloc(sizeof(int)*(SET_SIZE+1));
@@ -198,11 +219,24 @@ int main(){
 		perm1[i]=i;
 	}
 	perm_copy(SET_SIZE,perm1,perm_table[0]);
+	
+	for(i=1;i<group_size;i++){
+		perm_lex_successor(SET_SIZE,perm1, perm2);
+		perm_copy(SET_SIZE,perm1,perm_table[i]);
+	}
+	printf("Generated perms are:\n");
+	for(i=0;i<blib_graph_size(g);i++){
+		for(k=0;k<SET_SIZE;k++)
+			printf("%d ",perm_table[i][k]);
+		printf(")\n");
+	}
+	
+	BLIB_ERROR(" ");
 	for(i=0;i<blib_graph_size(g);i++){
 		perm_copy(SET_SIZE,perm_table[i],perm1);
 		blib_graph_set_edge(g,i,i,1);
 		while(1){
-			perm_mult(SET_SIZE,perm_table[i],perm1,perm2);
+			perm_mult(SET_SIZE,perm1,perm_table[i],perm2);
 			perm_copy(SET_SIZE,perm2,perm1);
 			if(equiv_perm(SET_SIZE,perm_table[i],perm1)){
 				break;
@@ -210,6 +244,15 @@ int main(){
 			blib_graph_set_dir_edge(g,perm_lex_rank(SET_SIZE,perm1,perm2),i,1);
 		}
 	}
+	
+	printf("Generated perms are:\n");
+	for(i=0;i<blib_graph_size(g);i++){
+		for(k=0;k<SET_SIZE;k++)
+			printf("%d ",perm_table[i][k]);
+		printf(")\n");
+	}
+	
+	
 	/*Now find the min vertex cover.  */
 	/*Bork the graph so that everybody goes directly to the identity element, and the identity goes to nobody*/
 	for(i=0;i<blib_graph_size(g);i++){
@@ -222,8 +265,13 @@ int main(){
 	dom_set(g,in_dom_set);
 	j=0;
 	for(i=0;i<group_size;i++){
-		if(in_dom_set[i])
+		if(in_dom_set[i]){
 			j++;
+			printf("[");
+			for(k=0;k<SET_SIZE;k++)
+				printf("%d ",perm_table[i][k]);
+			printf("]\n");
+		}
 	}
 	printf("There min dom set is size %d\n",j);
 	

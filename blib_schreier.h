@@ -22,7 +22,10 @@ typedef struct blib_schreier_t{
 	struct blib_schreier_t* temp_schreier;
 	}blib_schreier;
 
-
+/*Inline this badboy*/
+int blib_schreier_size(blib_schreier* g){
+	return g->size;
+}
 
 void blib_schreier_reset(blib_schreier* g){
 	int i,j,k,size;
@@ -75,9 +78,7 @@ blib_schreier*  blib_schreier_alloc( int size){
 
 
 
-int blib_schreier_size(blib_schreier* g){
-	return g->size;
-}
+
 
 void blib_schreier_print(blib_schreier* g, FILE* dest){
 	int i,j,k;
@@ -241,7 +242,7 @@ int TEST_COUNT=0;
 
 /*Borked it to manipulate perm*/
 int blib_schreier_test(blib_schreier* g, int* perm){
-	int i,j,k,found;
+	int i,j;
 	BLIB_ERROR("Test %d",TEST_COUNT++);
 /*	for(i=0;i<blib_schreier_size(g);i++){
 		g->temp[i]=perm[i];
@@ -256,8 +257,8 @@ int blib_schreier_test(blib_schreier* g, int* perm){
 			/*BLIB_ERROR("h^-1=");
 			print_perm(g->temp2,blib_schreier_size(g));*/
 			blib_schreier_mult(g,g->temp2,perm,g->temp3);
-			for(k=0;k<blib_schreier_size(g);k++)
-				perm[k]=g->temp3[k];
+			for(j=0;j<blib_schreier_size(g);j++)
+				perm[j]=g->temp3[j];
 		}
 		else{
 			return i;
@@ -267,13 +268,13 @@ int blib_schreier_test(blib_schreier* g, int* perm){
 }
 
 int blib_schreier_test2(blib_schreier* g, int* perm){
-	int i,j,k,found;
+	int i,j;
 	for(i=0;i<blib_schreier_size(g);i++){
 		if(g->perms[i][g->base[perm[i]]][0]>=0){
 			blib_schreier_inverse(g,g->perms[i][g->base[perm[i]]],g->temp2);
 			blib_schreier_mult(g,g->temp2,perm,g->temp3);
-			for(k=0;k<blib_schreier_size(g);k++)
-				perm[k]=g->temp3[k];
+			for(j=0;j<blib_schreier_size(g);j++)
+				perm[j]=g->temp3[j];
 		}
 		else{
 			return i;
@@ -366,7 +367,7 @@ int blib_schreier_enter2(blib_schreier* g,int* new_perm){
 
 
 blib_schreier* blib_schreier_change_base(blib_schreier* g, int* new_base){
-	int i,j,k,size;
+	int i,j,size;
 	blib_schreier* g_swap;
 	size=blib_schreier_size(g);
 	if(g->temp_schreier==NULL)
@@ -433,7 +434,7 @@ int blib_schreier_group_unit(){
 	blib_schreier* g;
 	int i,x;
 
-	int tmp[8];
+	/*int tmp[8];*/
 	/*(0,1,3,7,6,4)(2,5)*/
 	int bpa[]={1,3,5,7,0,2,4,6};
 	/*(0,1,3,2)(4,5,7,6)*/
@@ -442,7 +443,7 @@ int blib_schreier_group_unit(){
 	/*Generators of A4 (Alternating group on 5 elements)*/
 	int perma[]={1,0,3,2,4};
 	int permb[]={2,1,4,3,0};
-	int cyc3[]={1,0,2};
+	/*int cyc3[]={1,0,2};*/
 	
 	/*g=blib_schreier_alloc(3);
 	blib_schreier_enter(g,cyc3);

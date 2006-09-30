@@ -6,6 +6,7 @@
 
 int BLIB_DEBUG_ARR[500];
 int BLIB_DEBUG_X;
+/*int BLIB_ALLOC_COUNT=0;*/
 
 void blib_error_location(char* file_name,int line){
 	fprintf(stderr,":%s (%d)\n",file_name,line);
@@ -15,6 +16,11 @@ void blib_error_location(char* file_name,int line){
 
 void* blib_error_malloc(size_t size, char* file,int line){
 	void* ptr=malloc(size);
+	/*if(size>5000){
+		BLIB_ERROR("A little big aren't we?");
+	}
+	BLIB_ERROR("Allocing %d (%d)",BLIB_ALLOC_COUNT++,size);*/
+	
 	if(ptr==NULL){
 		/*
 		Attempt to free some temp storage

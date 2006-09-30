@@ -14,9 +14,7 @@ int main(){
 	int* orbits;
 	int verts,x,y;
 	FILE* g_file;
-#ifdef BLIB_UNIT_TEST
-	blib_unit_test();
-#endif
+
 	/*g_file=fopen("/tmp/fccgraph.txt","rb");*/
 	g_file=fopen("/tmp/fccgraph.txt","rb");
 	if(g_file==NULL)
@@ -59,9 +57,9 @@ int main(){
 	blib_graph_set_edge(graph,1,2,1);
 	blib_graph_set_edge(graph,2,0,1);
 	blib_graph_set_edge(graph,2,3,1);*/
-	blib_graph_auto(graph,orbits,NULL,NULL,NULL);
+	/*blib_graph_auto(graph,orbits,NULL,NULL,NULL);
 	for(i=0;i<graph->size;i++)
-		printf("%d ",orbits[i]);
+		printf("%d ",orbits[i]);*/
 	printf("\n");
 	blib_ham_path(graph,&blib_ham_path_hello_world);
 	blib_graph_free(graph);

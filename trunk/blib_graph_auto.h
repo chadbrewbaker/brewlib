@@ -278,6 +278,7 @@ int blib_graph_auto_record(blib_graph_auto_storage* stuff, int depth, int result
 	
 	/*Found an automorph so record it*/
 	if(result==0){
+		
 		if(stuff->schreier!=NULL){
 			BLIB_ERROR("Orbit found");
 			for(i=0;i<size;i++){
@@ -495,6 +496,53 @@ void blib_graph_auto_edge_colored(blib_graph* g, int* orbs){
 	/*Run graph auto*/
 	/*return the orbits of the vertex verticies as normal*/
 }
+
+void blib_graph_auto_print_saucy(blib_graph* g,blib_partition* part,FILE* stream){
+	int i,j,is_first,size;
+	size=blib_graph_size(g);
+	fprintf(stream,"%d %d %d ",size,blib_graph_edge_count(g),blib_partition_cell_count(part));
+	int* temp_perm;
+	
+	for(i=1;i<blib_partition_cell_count(part);i++){
+		fprintf(stream,"%d ",part->cells[i]);	
+	}
+	temp_perm=(int*)malloc(sizeof(int)*size);
+	for(i=0;i<size;i++){
+		temp_perm[i]=part->perm[i];
+	}
+	is_first=1;
+	for(i=0;i<blib_graph_size(g);i++){
+		for(j=i+1;j<blib_graph_size(g);j++){
+			if(blib_graph_is_edge(g,i,j)){
+				fprintf(stream,"%d %d \n",temp_perm[i],temp_perm[j]);	
+				}
+			}
+	}
+	free(temp_perm);
+}
+
+void blib_graph_auto_print_gap(blib_graph* g,blib_partition* part,FILE* stream){
+	int i,j,is_first;
+	fprintf(stream,"AutGroupGraph(UnderlyingGraph(EdgeOrbitsGraph( Group(()), [");
+	is_first=1;
+	for(i=0;i<blib_graph_size(g);i++){
+		for(j=i+1;j<blib_graph_size(g);j++){
+			if(blib_graph_is_edge(g,i,j)){
+				if(is_first){
+					fprintf(stream,"[%d,%d]",i+1,j+1);
+					is_first=0;
+				}
+				else{
+					fprintf(stream,",[%d,%d]",i+1,j+1);	
+				}
+			}
+		}
+	}
+	fprintf(stream,"], %d)),[",blib_graph_size(g));
+	blib_partition_print(part,stream);
+	fprintf(stream,"]);\n");
+}
+
 
 #ifdef BLIB_UNIT_TEST
 

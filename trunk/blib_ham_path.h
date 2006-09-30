@@ -155,13 +155,15 @@ void blib_ham_path_sub(blib_graph* g,blib_graph* eg,void(*path_func)(int*,int,in
 					new_cell_count++;
 				}
 			}
+			fprintf(stderr,"((%d %d %d %d))\n",new_cells[0],new_cells[1],new_cells[2],new_cells[3]);
+			/*used verts, unused verts,used edges,unused edges     */
 			blib_partition_recell(pre_part,new_cells,new_cell_count);
-			blib_partition_print(pre_part,stderr);
-			BLIB_ERROR("Calling Auto");
+			blib_partition_reorder(pre_part,junk);
+			BLIB_ERROR("Calling Auto on :");
 			out_file=fopen("larry.gr","w");
-			
-			blib_graph_print(eg,out_file);
-			blib_partition_print(pre_part,stderr);
+			blib_graph_auto_print_saucy(eg,pre_part,out_file);
+			/*blib_graph_auto_print_gap(eg,pre_part,out_file);
+			blib_graph_auto_print_gap(eg,pre_part,stderr);*/
 			/*blib_graph_print_dreadnaut(eg,out_file);
 			blib_partition_print_dreadnaut(pre_part,out_file);
 			fprintf(out_file,"x\no\n");*/

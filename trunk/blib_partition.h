@@ -401,12 +401,21 @@ void blib_partition_get_perm(blib_partition* part, int* value)
 		value[i]=part->perm[i];
 }
 void blib_partition_print(blib_partition* part,FILE* stream){
-	int i,j,used;
+	int i,j,used,is_first;
 	used=0;
 	for(i=0;i<part->cell_count;i++){
-		fprintf(stream,"[");
+		if(used<1)
+			fprintf(stream,"[");
+		else
+			fprintf(stream,",[");
+		is_first=1;
 		for(j=0;j<blib_partition_cell_size(part,i);j++){
-			fprintf(stream,"%d ",part->perm[used]);
+			if(is_first){
+				fprintf(stream,"%d",part->perm[used]+1);
+				is_first=0;
+			}
+			else
+				fprintf(stream,",%d",part->perm[used]+1);
 			used++;	
 		}
 		fprintf(stream,"]");

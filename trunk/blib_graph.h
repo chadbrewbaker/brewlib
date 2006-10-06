@@ -155,6 +155,29 @@ void blib_graph_print(blib_graph* g,FILE* stream){
 	}
 	fprintf(stream,"-1\n");
 }
+
+
+void blib_graph_print_dot(blib_graph* g,FILE* stream,char** names){
+	int i,j;
+	fprintf(stream,"digraph g {\n");
+	if(names!=NULL){
+		for(i=0;i<blib_graph_size(g);i++){
+			if(names[i]!=NULL)
+				fprintf(stream,"v%d [label=\"%s\"];\n",i,names[i]);
+		}
+	}
+	for(i=0;i<blib_graph_size(g);i++){
+		for(j=0;j<blib_graph_size(g);j++){
+			if(blib_graph_is_edge(g,i,j)){
+				fprintf(stream,"v%d -> v%d;\n",i,j);
+			}
+		}
+	}
+	fprintf(stream,"\n}\n");
+}
+
+
+
 /*Prints in a zero based %edges %verts a b\n a b\n... format*/
 void blib_graph_print_cages(blib_graph* g,FILE* stream){
 	int i,j;

@@ -17,7 +17,22 @@ typedef struct blib_graph_sparse_t{
 	int buffer_size;
 }blib_graph_sparse;
 
+inline
+int blib_graph_sparse_edge_deg(blib_graph_sparse* g, int x){
+	return g->used_edges[x];
+}
 
+inline
+int blib_graph_sparse_nth_edge(blib_graph_sparse*g, int x, int n){
+#ifdef BLIB_DEBUG
+	if(n>=g->used_edges[x])
+		return -1;
+#endif
+	return g->adj[x][n];
+}
+
+
+inline
 blib_graph_sparse* blib_graph_sparse_allocate(int size){
 	int i;
 	blib_graph_sparse* g;
@@ -34,6 +49,7 @@ blib_graph_sparse* blib_graph_sparse_allocate(int size){
 	return g;
 }
 
+inline
 void blib_graph_free(blib_graph_sparse* g){
 	int i;
 	for(i=0;i<g->size;i++){
@@ -44,11 +60,15 @@ void blib_graph_free(blib_graph_sparse* g){
 	free(g);
 }
 
+
+inline
 int blib_graph_edge(blib_graph_sparse* g,int a, int b){
 	int i;
+#ifdef BLIB_DEBUG
 	if(a >= g->size || b >= g->size){
 		BLIB_ERROR("OUT OF BOUNDS graph access");
 	}
+#endif
 	for(i=0;i<g->used_edges[a];i++){
 		if(g->adj[a][i]==b){
 			return 1;
@@ -57,6 +77,7 @@ int blib_graph_edge(blib_graph_sparse* g,int a, int b){
 	return BLIB_GRAPH_SPARSE_NO_EDGE_VAL;
 }
 
+inline
 int blib_graph_size(blib_graph_sparse* g){
 	return g->size;	
 }
@@ -64,17 +85,16 @@ int blib_graph_size(blib_graph_sparse* g){
 void blib_graph_set_dir_edge( blib_graph_sparse* g, int a, int b,int val){
 	int i,j,new_size;
 	int* new_list;
+    #ifdef BLIB_DEBUG
 	if(a >= g->size || b >= g->size){
 		BLIB_ERROR("OUT OF BOUNDS");
 	}
-	/*printf("Processing %d %d %d",a,b,val);*/
+    #endif
 	for(i=0;i<g->used_edges[a];i++){
 		if(g->adj[a][i]==b){
 			if(val!= BLIB_GRAPH_SPARSE_NO_EDGE_VAL)
 				return;
 			else{
-				
-				
 				for(j=i;j<g->used_edges[a]-1;j++){
 					g->adj[a][j]=g->adj[a][j+1];
 				}
@@ -104,16 +124,19 @@ void blib_graph_set_dir_edge( blib_graph_sparse* g, int a, int b,int val){
 	g->alloced_edges[a]=new_size;
 }
 
+inline
 void blib_graph_set_edge(blib_graph_sparse* g, int a, int b, int val){
 	blib_graph_set_dir_edge(g,a,b,val);
 	blib_graph_set_dir_edge(g,b,a,val);
 }
 
-
+inline
 int blib_graph_is_edge(blib_graph_sparse* g, int a, int b){
+    #ifdef BLIB_DEBUG
 	if( a> g->size || b>g->size){
 		BLIB_ERROR("Edge out of bounds (%d,%d)",a,b);	
 	}
+    #endif
 	if(blib_graph_edge(g,a,b)!=BLIB_GRAPH_SPARSE_NO_EDGE_VAL)
 		return 1;
 	return 0;
@@ -136,7 +159,6 @@ blib_graph_sparse* blib_graph_copy(blib_graph_sparse* a, blib_graph_sparse* b){
 }
 
 
-
 void blib_graph_print_dot(blib_graph_sparse* g,FILE* stream,char** names){
 	int i,j;
 	fprintf(stream,"digraph g {\n");
@@ -155,6 +177,39 @@ void blib_graph_print_dot(blib_graph_sparse* g,FILE* stream,char** names){
 	}
 	fprintf(stream,"\n}\n");
 }
+
+
+
+/*Labels each vertex with the lex smallest vertex in it's connected component*/ 
+/*I'm lazy so here is the O(n^3) version*/
+void blib_graph_sparse_connected_component_list(blib_graph_sparse* g, int* con_set){
+	int i,j,k,dest,dirty,size;
+	size=blib_graph_size(g);
+	for(i=0;i<size;i++){
+		con_set[i]=i;
+	}
+	for(i=0;i<size;i++){
+		dirty=0;
+		for(j=0;j<size;j++){
+			for(k=0;k<blib_graph_sparse_edge_deg(g,j);k++){
+				dest=blib_graph_sparse_nth_edge(g,j,k);
+				if(con_set[j]!=con_set[dest]){
+					if(con_set[j]<con_set[dest])
+						con_set[dest]=con_set[j];
+					else
+						con_set[j]=con_set[dest];
+					dirty =1;
+				}
+			}
+		}
+		if(!dirty)
+			break;
+	}
+}
+
+
+
+
 
 
 

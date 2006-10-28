@@ -208,6 +208,38 @@ void blib_graph_print_dreadnaut(blib_graph* g,FILE* stream){
 	/*To get orbits fprintf(stream,"\nx\no\n");*/
 }
 
+
+
+/*Labels each vertex with the lex smallest vertex in it's connected component*/ 
+/*I'm lazy so here is the O(n^3) version*/
+void blib_graph_connected_component_list(blib_graph* g, int* con_set){
+	int i,j,k,dirty,size;
+	size=blib_graph_size(g);
+	for(i=0;i<size;i++){
+		con_set[i]=i;
+	}
+	for(i=0;i<size;i++){
+		dirty=0;
+		for(j=0;j<size;j++){
+			for(k=0;k<size;k++){
+				if(blib_graph_is_edge(g,j,k) || blib_graph_is_edge(g,k,j)){
+					if(con_set[j]!=con_set[k]){
+						if(con_set[j]<con_set[k])
+							con_set[k]=con_set[j];
+						else
+							con_set[j]=con_set[k];
+					dirty =1;
+					}
+				}
+			}
+		}
+		if(!dirty)
+			break;
+	}
+}
+
+
+
 #ifdef BLIB_UNIT_TEST
 
 int blib_graph_unit(void){

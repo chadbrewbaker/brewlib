@@ -182,17 +182,21 @@ void blib_graph_print_dot(blib_graph_sparse* g,FILE* stream,char** names){
 
 /*Labels each vertex with the lex smallest vertex in it's connected component*/ 
 /*I'm lazy so here is the O(n^3) version*/
+/*Pre-color con_set with a list if you want to partition with it*/
 void blib_graph_sparse_connected_component_list(blib_graph_sparse* g, int* con_set){
 	int i,j,k,dest,dirty,size;
 	size=blib_graph_size(g);
 	for(i=0;i<size;i++){
-		con_set[i]=i;
-	}
-	for(i=0;i<size;i++){
 		dirty=0;
 		for(j=0;j<size;j++){
+			if(con_set[j]<0)
+				continue;
 			for(k=0;k<blib_graph_sparse_edge_deg(g,j);k++){
 				dest=blib_graph_sparse_nth_edge(g,j,k);
+				if(j==dest)
+					continue;
+				if(con_set[dest]<0)
+					continue;
 				if(con_set[j]!=con_set[dest]){
 					if(con_set[j]<con_set[dest])
 						con_set[dest]=con_set[j];
